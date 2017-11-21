@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UKO-YP-Rxc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tut-Tt-2QU">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Counter Table View Controller-->
+        <!--Countdowns-->
         <scene sceneID="aoz-TK-xRj">
             <objects>
                 <tableViewController id="UKO-YP-Rxc" customClass="CounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,6 +50,7 @@
                                     <outlet property="countdownLbl" destination="ftz-U6-xBV" id="W50-Hy-gDD"/>
                                     <outlet property="counterNameLbl" destination="qWp-Ar-cdL" id="OeP-Z9-ucw"/>
                                     <outlet property="img" destination="OQd-Ta-7HI" id="Uwu-qm-Vus"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="vKw-ne-hEF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -58,12 +59,20 @@
                             <outlet property="delegate" destination="UKO-YP-Rxc" id="0y4-4b-eFC"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Countdowns" id="ZcF-6I-rXk">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Pti-8v-N4m"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sSb-r9-nCy">
+                            <connections>
+                                <segue destination="EfM-35-pRH" kind="presentation" identifier="AddItem" id="28T-zT-IAJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OP2-Qe-LTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-684" y="150.67466266866569"/>
+            <point key="canvasLocation" x="-954" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Counter-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zQM-3A-tzB">
-                                <rect key="frame" x="20" y="40" width="335" height="320.5"/>
+                                <rect key="frame" x="20" y="84" width="335" height="320.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqR-ZB-KKm">
                                         <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
@@ -80,7 +89,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Countdown Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Countdown Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
                                         <rect key="frame" x="0.0" y="28.5" width="174.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -107,13 +116,70 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Counter" id="wrL-H3-JUb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sqf-AZ-0uA">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="CXv-U2-hoF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="RXD-uY-LbU">
+                            <connections>
+                                <segue destination="RpA-aj-7II" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="7oO-lZ-s4v"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="faj-Vx-Rx5" id="KL8-jf-zWL"/>
+                        <outlet property="nameTextField" destination="Wvj-Iv-zh7" id="q7h-XE-nUN"/>
+                        <outlet property="saveButton" destination="RXD-uY-LbU" id="xmb-UB-Lwo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="RpA-aj-7II" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+            <point key="canvasLocation" x="815.20000000000005" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0g3-Su-ibS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tut-Tt-2QU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="efx-2n-YDX">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UKO-YP-Rxc" kind="relationship" relationship="rootViewController" id="KNH-Ua-Tvd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecb-fQ-ZxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1807" y="132"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PIL-rz-Jzb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EfM-35-pRH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bz3-fA-l6e">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uqX-se-YcA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y2f-7T-wGc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-55" y="529"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="4674" height="3336"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vKw-ne-hEF"/>
+    </inferredMetricsTieBreakers>
 </document>
