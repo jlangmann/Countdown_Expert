@@ -18,6 +18,9 @@ class ViewController:  UIViewController, UITextFieldDelegate, UIImagePickerContr
     
     var counter: Counter?
     
+    @IBAction func valueChanged(_ sender: Any) {
+        datePicker.minimumDate = Date()
+    }
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         let addMode = presentingViewController is UINavigationController
         

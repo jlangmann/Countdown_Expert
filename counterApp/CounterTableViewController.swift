@@ -32,13 +32,11 @@ class CounterTableViewController: UITableViewController {
     }
     
     private func loadSampleCounters() {
-        let photo1 = UIImage(named: "defaultPhoto")
-        guard let counter1 = Counter(name: "Birthday", photo: photo1, date: Date()) else {
-            fatalError("Unable to instantiate meal1")
-        }
-        
-        
-        counters = [counter1]
+       // let photo1 = UIImage(named: "defaultPhoto")
+       // guard let counter1 = Counter(name: "Birthday", photo: photo1, date: Date()) else {
+       //     fatalError("Unable to instantiate meal1")
+        // }
+        counters = []
     }
     
     override func viewDidLoad() {
@@ -79,8 +77,32 @@ class CounterTableViewController: UITableViewController {
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
-       // cell.ratingControl.rating = counter.date
+        let calendar = Calendar.current
         
+        let diffDateComponents = calendar.dateComponents([.day , .hour , .minute , .second], from: Date(), to: counter.date)
+        
+        let days = Int(diffDateComponents.day!)
+        let hours = Int(diffDateComponents.hour!)
+        let minutes = Int(diffDateComponents.minute!)
+        let seconds = Int(diffDateComponents.second!)
+        var countdown = ""
+        if (days != 0)
+        {
+            countdown = "\(days) Days, "
+        }
+        if (days != 0 || (hours != 0))
+        {
+            countdown = countdown + "\(hours) Hours, "
+        }
+        if (days != 0 || hours != 0 || (minutes != 0))
+        {
+            countdown = countdown + "\(minutes) Minutes, "
+        }
+        if (days != 0  || hours != 0 || minutes != 0 || (seconds != 0))
+        {
+            countdown = countdown + "\(seconds) Seconds"
+        }
+        cell.countdownLbl.text = countdown
         return cell
     }
 

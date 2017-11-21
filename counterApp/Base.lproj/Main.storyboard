@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zQM-3A-tzB">
-                                <rect key="frame" x="20" y="84" width="335" height="320.5"/>
+                                <rect key="frame" x="20" y="84" width="335" height="282.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqR-ZB-KKm">
                                         <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
@@ -89,7 +89,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Countdown Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
+                                    <textField opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Countdown Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
                                         <rect key="frame" x="0.0" y="28.5" width="174.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -100,11 +100,10 @@
                                         <date key="date" timeIntervalSinceReferenceDate="532934532.39785302">
                                             <!--2017-11-21 05:22:12 +0000-->
                                         </date>
+                                        <connections>
+                                            <action selector="valueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="t3R-Wo-qeE"/>
+                                        </connections>
                                     </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iC-Pk-pss">
-                                        <rect key="frame" x="0.0" y="290.5" width="46" height="30"/>
-                                        <state key="normal" title="Create"/>
-                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
