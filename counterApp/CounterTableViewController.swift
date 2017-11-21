@@ -10,9 +10,23 @@ import UIKit
 
 class CounterTableViewController: UITableViewController {
 
+    var counters = [Counter]()
+    
+    private func loadSampleCounters() {
+        let photo1 = UIImage(named: "defaultPhoto")
+        guard let counter1 = Counter(name: "Caprese Salad", photo: photo1, date: Date()) else {
+            fatalError("Unable to instantiate meal1")
+        }
+        
+        
+        counters = [counter1]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadSampleCounters()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,24 +42,26 @@ class CounterTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return counters.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
         // Configure the cell...
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CounterTableViewCell", for: indexPath) as? CounterTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+        }
+        let counter = counters[indexPath.row]
+        
+        cell.counterNameLbl.text = counter.name
+        cell.img.image = counter.photo
+       // cell.ratingControl.rating = counter.date
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

@@ -14,6 +14,7 @@
 		E3BF7E8D1FC3EB0A00B75C43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3BF7E8B1FC3EB0A00B75C43 /* LaunchScreen.storyboard */; };
 		E3BF7E951FC3F0E300B75C43 /* CounterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E941FC3F0E300B75C43 /* CounterTableViewCell.swift */; };
 		E3BF7E971FC3F4F600B75C43 /* CounterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E961FC3F4F600B75C43 /* CounterTableViewController.swift */; };
+		E3BF7E991FC3F6ED00B75C43 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E981FC3F6ED00B75C43 /* Counter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		E3BF7E8E1FC3EB0A00B75C43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3BF7E941FC3F0E300B75C43 /* CounterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
 		E3BF7E961FC3F4F600B75C43 /* CounterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewController.swift; sourceTree = "<group>"; };
+		E3BF7E981FC3F6ED00B75C43 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */,
 				E3BF7E861FC3EB0A00B75C43 /* Main.storyboard */,
 				E3BF7E961FC3F4F600B75C43 /* CounterTableViewController.swift */,
+				E3BF7E981FC3F6ED00B75C43 /* Counter.swift */,
 				E3BF7E941FC3F0E300B75C43 /* CounterTableViewCell.swift */,
 				E3BF7E891FC3EB0A00B75C43 /* Assets.xcassets */,
 				E3BF7E8B1FC3EB0A00B75C43 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3BF7E991FC3F6ED00B75C43 /* Counter.swift in Sources */,
 				E3BF7E971FC3F4F600B75C43 /* CounterTableViewController.swift in Sources */,
 				E3BF7E851FC3EB0A00B75C43 /* ViewController.swift in Sources */,
 				E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */,
