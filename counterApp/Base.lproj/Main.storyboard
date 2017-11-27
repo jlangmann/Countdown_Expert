@@ -26,22 +26,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="OQd-Ta-7HI">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="OQd-Ta-7HI">
                                             <rect key="frame" x="8" y="11" width="76" height="68"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Counter Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWp-Ar-cdL">
-                                            <rect key="frame" x="92" y="11" width="267" height="21"/>
+                                            <rect key="frame" x="92" y="11" width="160" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Countdown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftz-U6-xBV">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftz-U6-xBV">
                                             <rect key="frame" x="92" y="40" width="267" height="39"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Counting down... ">
+                                                    <attributes>
+                                                        <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opo-a3-Nar">
+                                            <rect key="frame" x="260" y="11" width="99" height="19"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                            <color key="textColor" red="0.0" green="0.1908044440863268" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -49,6 +61,7 @@
                                 <connections>
                                     <outlet property="countdownLbl" destination="ftz-U6-xBV" id="W50-Hy-gDD"/>
                                     <outlet property="counterNameLbl" destination="qWp-Ar-cdL" id="OeP-Z9-ucw"/>
+                                    <outlet property="dateLbl" destination="opo-a3-Nar" id="tk4-UU-V0n"/>
                                     <outlet property="img" destination="OQd-Ta-7HI" id="Uwu-qm-Vus"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="vKw-ne-hEF"/>
                                 </connections>
@@ -70,9 +83,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OP2-Qe-LTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-954" y="132"/>
+            <point key="canvasLocation" x="-954.39999999999998" y="131.78410794602701"/>
         </scene>
-        <!--Add Counter-->
+        <!--Add Countdown-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -80,42 +93,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zQM-3A-tzB">
-                                <rect key="frame" x="20" y="84" width="335" height="282.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqR-ZB-KKm">
-                                        <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Countdown Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
-                                        <rect key="frame" x="0.0" y="28.5" width="174.5" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                    </textField>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="faj-Vx-Rx5">
-                                        <rect key="frame" x="0.0" y="66.5" width="320" height="216"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="532934532.39785302">
-                                            <!--2017-11-21 05:22:12 +0000-->
-                                        </date>
-                                        <connections>
-                                            <action selector="valueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="t3R-Wo-qeE"/>
-                                        </connections>
-                                    </datePicker>
-                                </subviews>
-                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Countdown Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
+                                <rect key="frame" x="16" y="77" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="faj-Vx-Rx5">
+                                <rect key="frame" x="16" y="115" width="343" height="195"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="532934532.39785302">
+                                    <!--2017-11-21 05:22:12 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="valueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="t3R-Wo-qeE"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwN-KF-zKb">
+                                <rect key="frame" x="16" y="318" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Change Photo"/>
+                                <connections>
+                                    <action selector="editPhotoAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bhx-Gk-pzI"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="lg3-oz-bkv">
+                                <rect key="frame" x="16" y="356" width="343" height="283"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zQM-3A-tzB" secondAttribute="trailing" constant="20" id="LHz-dO-jYl"/>
-                            <constraint firstItem="zQM-3A-tzB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Oba-up-IgC"/>
-                            <constraint firstItem="zQM-3A-tzB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="SD8-JB-Mvl"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Counter" id="wrL-H3-JUb">
+                    <navigationItem key="navigationItem" title="Add Countdown" id="wrL-H3-JUb">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sqf-AZ-0uA">
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="CXv-U2-hoF"/>
@@ -123,13 +135,15 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="RXD-uY-LbU">
                             <connections>
-                                <segue destination="RpA-aj-7II" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="7oO-lZ-s4v"/>
+                                <segue destination="RpA-aj-7II" kind="unwind" identifier="saveCounterSegue" unwindAction="unwindToCounterListWithSender:" id="7oO-lZ-s4v"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="datePicker" destination="faj-Vx-Rx5" id="KL8-jf-zWL"/>
+                        <outlet property="editPhotoBtn" destination="rwN-KF-zKb" id="DPg-eD-G7I"/>
                         <outlet property="nameTextField" destination="Wvj-Iv-zh7" id="q7h-XE-nUN"/>
+                        <outlet property="photoImageView" destination="lg3-oz-bkv" id="xrC-Tc-76Y"/>
                         <outlet property="saveButton" destination="RXD-uY-LbU" id="xmb-UB-Lwo"/>
                     </connections>
                 </viewController>

@@ -22,6 +22,8 @@ class CounterTableViewController: UITableViewController {
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
+                saveCountdowns()
+                
                 // Add a new meal.
                 let newIndexPath = IndexPath(row: counters.count, section: 0)
                 
@@ -39,13 +41,28 @@ class CounterTableViewController: UITableViewController {
         counters = []
     }
     
+    
+    private func saveCountdowns() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(counters, toFile: Counter.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Countdown successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save countdowns...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadCountdowns() -> [Counter]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadSampleCounters()
         
         navigationItem.leftBarButtonItem = editButtonItem
         
+        if let savedCountdowns = loadCountdowns() {
+            counters += savedCountdowns
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -77,32 +94,10 @@ class CounterTableViewController: UITableViewController {
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
-        let calendar = Calendar.current
         
-        let diffDateComponents = calendar.dateComponents([.day , .hour , .minute , .second], from: Date(), to: counter.date)
+        cell.setupCounter(date: counter.date)
         
-        let days = Int(diffDateComponents.day!)
-        let hours = Int(diffDateComponents.hour!)
-        let minutes = Int(diffDateComponents.minute!)
-        let seconds = Int(diffDateComponents.second!)
-        var countdown = ""
-        if (days != 0)
-        {
-            countdown = "\(days) Days, "
-        }
-        if (days != 0 || (hours != 0))
-        {
-            countdown = countdown + "\(hours) Hours, "
-        }
-        if (days != 0 || hours != 0 || (minutes != 0))
-        {
-            countdown = countdown + "\(minutes) Minutes, "
-        }
-        if (days != 0  || hours != 0 || minutes != 0 || (seconds != 0))
-        {
-            countdown = countdown + "\(seconds) Seconds"
-        }
-        cell.countdownLbl.text = countdown
+        
         return cell
     }
 
@@ -117,6 +112,7 @@ class CounterTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             counters.remove(at: indexPath.row)
+            saveCountdowns()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
