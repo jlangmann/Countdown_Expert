@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12E1796F4DB190BD0A570052 /* Pods_counterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE91F4B210BA6F74503184 /* Pods_counterApp.framework */; };
+		E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */; };
+		E3712EBE1FCE837B00EDFE16 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */; };
 		E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */; };
 		E3BF7E851FC3EB0A00B75C43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */; };
 		E3BF7E881FC3EB0A00B75C43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3BF7E861FC3EB0A00B75C43 /* Main.storyboard */; };
@@ -18,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77FE91F4B210BA6F74503184 /* Pods_counterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_counterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAA0A64A3B79FE94AC98B774 /* Pods-counterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-counterApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-counterApp/Pods-counterApp.debug.xcconfig"; sourceTree = "<group>"; };
+		E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		E3BF7E7F1FC3EB0A00B75C43 /* counterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = counterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,6 +35,7 @@
 		E3BF7E941FC3F0E300B75C43 /* CounterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewCell.swift; sourceTree = "<group>"; };
 		E3BF7E961FC3F4F600B75C43 /* CounterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTableViewController.swift; sourceTree = "<group>"; };
 		E3BF7E981FC3F6ED00B75C43 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		F67CD57DC28ECCA23AA1BA5D /* Pods-counterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-counterApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-counterApp/Pods-counterApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12E1796F4DB190BD0A570052 /* Pods_counterApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E1CC5E4668F46B82DCDBF3D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAA0A64A3B79FE94AC98B774 /* Pods-counterApp.debug.xcconfig */,
+				F67CD57DC28ECCA23AA1BA5D /* Pods-counterApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5D9A4E35F95035EC1C04FBE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77FE91F4B210BA6F74503184 /* Pods_counterApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E3BF7E761FC3EB0A00B75C43 = {
 			isa = PBXGroup;
 			children = (
 				E3BF7E811FC3EB0A00B75C43 /* counterApp */,
 				E3BF7E801FC3EB0A00B75C43 /* Products */,
+				2E1CC5E4668F46B82DCDBF3D /* Pods */,
+				5D9A4E35F95035EC1C04FBE5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +91,8 @@
 				E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */,
 				E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */,
 				E3BF7E861FC3EB0A00B75C43 /* Main.storyboard */,
+				E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */,
+				E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */,
 				E3BF7E961FC3F4F600B75C43 /* CounterTableViewController.swift */,
 				E3BF7E981FC3F6ED00B75C43 /* Counter.swift */,
 				E3BF7E941FC3F0E300B75C43 /* CounterTableViewCell.swift */,
@@ -80,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3BF7E911FC3EB0A00B75C43 /* Build configuration list for PBXNativeTarget "counterApp" */;
 			buildPhases = (
+				07390E3B368AFA6A23AB4D4E /* [CP] Check Pods Manifest.lock */,
 				E3BF7E7B1FC3EB0A00B75C43 /* Sources */,
 				E3BF7E7C1FC3EB0A00B75C43 /* Frameworks */,
 				E3BF7E7D1FC3EB0A00B75C43 /* Resources */,
+				589CF3A64804B054F05B8DF4 /* [CP] Embed Pods Frameworks */,
+				B936751B86BF5B4EF3BB0D18 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -140,6 +173,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07390E3B368AFA6A23AB4D4E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-counterApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		589CF3A64804B054F05B8DF4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B936751B86BF5B4EF3BB0D18 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-counterApp/Pods-counterApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E3BF7E7B1FC3EB0A00B75C43 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -149,6 +236,8 @@
 				E3BF7E971FC3F4F600B75C43 /* CounterTableViewController.swift in Sources */,
 				E3BF7E851FC3EB0A00B75C43 /* ViewController.swift in Sources */,
 				E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */,
+				E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */,
+				E3712EBE1FCE837B00EDFE16 /* CalendarViewController.swift in Sources */,
 				E3BF7E951FC3F0E300B75C43 /* CounterTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +373,7 @@
 		};
 		E3BF7E921FC3EB0A00B75C43 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA0A64A3B79FE94AC98B774 /* Pods-counterApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -299,6 +389,7 @@
 		};
 		E3BF7E931FC3EB0A00B75C43 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F67CD57DC28ECCA23AA1BA5D /* Pods-counterApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

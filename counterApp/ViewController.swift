@@ -9,6 +9,7 @@
 import UIKit
 import os.log
 
+
 class ViewController:  UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var saveButton: UIBarButtonItem!
@@ -138,7 +139,5 @@ class ViewController:  UIViewController, UITextFieldDelegate, UIImagePickerContr
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
