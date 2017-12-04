@@ -15,7 +15,6 @@ class ViewController:  UIViewController, UITextFieldDelegate, UIImagePickerContr
     @IBOutlet var saveButton: UIBarButtonItem!
 
     @IBOutlet var photoImageView: UIImageView!
-    @IBOutlet var editImgBtn: UIButton!
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var nameTextField: UITextField!
     
@@ -123,14 +122,14 @@ class ViewController:  UIViewController, UITextFieldDelegate, UIImagePickerContr
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Handle the text field’s user input through delegate callbacks.
-        nameTextField.delegate = self
+       // nameTextField.delegate = self
         
         // edit existing counter
         if let counter = counter {
-            navigationItem.title = "Edit " + counter.name
-            nameTextField.text = counter.name
-            datePicker.date = counter.date
-            photoImageView.image = counter.photo
+        //    navigationItem.title = "Edit " + counter.name
+        //    nameTextField.text = counter.name
+        //    datePicker.date = counter.date
+        //    photoImageView.image = counter.photo
         }
     
     }

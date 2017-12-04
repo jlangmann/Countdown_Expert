@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		12E1796F4DB190BD0A570052 /* Pods_counterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE91F4B210BA6F74503184 /* Pods_counterApp.framework */; };
+		E370B4731FD52DEB00F6F986 /* CreateCounterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */; };
 		E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */; };
 		E3712EBE1FCE837B00EDFE16 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */; };
 		E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		77FE91F4B210BA6F74503184 /* Pods_counterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_counterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA0A64A3B79FE94AC98B774 /* Pods-counterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-counterApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-counterApp/Pods-counterApp.debug.xcconfig"; sourceTree = "<group>"; };
+		E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterTableViewController.swift; sourceTree = "<group>"; };
 		E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		E3BF7E7F1FC3EB0A00B75C43 /* counterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = counterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +93,7 @@
 				E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */,
 				E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */,
 				E3BF7E861FC3EB0A00B75C43 /* Main.storyboard */,
+				E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */,
 				E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */,
 				E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */,
 				E3BF7E961FC3F4F600B75C43 /* CounterTableViewController.swift */,
@@ -236,6 +239,7 @@
 				E3BF7E971FC3F4F600B75C43 /* CounterTableViewController.swift in Sources */,
 				E3BF7E851FC3EB0A00B75C43 /* ViewController.swift in Sources */,
 				E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */,
+				E370B4731FD52DEB00F6F986 /* CreateCounterTableViewController.swift in Sources */,
 				E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */,
 				E3712EBE1FCE837B00EDFE16 /* CalendarViewController.swift in Sources */,
 				E3BF7E951FC3F0E300B75C43 /* CounterTableViewCell.swift in Sources */,

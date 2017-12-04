@@ -146,7 +146,7 @@ class CounterTableViewController: UITableViewController {
         switch(segue.identifier ?? "") {
             
             case "AddItem":
-                os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+                os_log("Adding a new counter.", log: OSLog.default, type: .debug)
             
             case "ShowDetail":
                 guard let viewController = segue.destination as? ViewController else {
