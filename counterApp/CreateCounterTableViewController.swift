@@ -9,15 +9,27 @@
 import UIKit
 
 class CreateCounterTableViewController: UITableViewController {
-
+    
+    var timeCellExpanded: Bool = false
+    let timeFormatter = DateFormatter()
     
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var editTimeBtn: UIButton!
     @IBOutlet var editImgBtn: UIButton!
+    @IBOutlet var timePicker: UIDatePicker!
+    
+    @IBOutlet var timeLbl: UILabel!
+    @IBAction func timePicked(_ sender: Any) {
+        timeLbl.text = timeFormatter.string(from: timePicker.date)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        timeFormatter.dateFormat = "HH:mm:ss a"
+        timeFormatter.amSymbol = "AM"
+        timeFormatter.pmSymbol = "PM"
+        
+        timeLbl.text = timeFormatter.string(from: timePicker.date)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -32,7 +44,30 @@ class CreateCounterTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-  
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2
+        {
+            if timeCellExpanded{
+                timeCellExpanded = false
+            }
+            else {
+                timeCellExpanded = true
+            }
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 2
+        {
+            if timeCellExpanded {
+                return 250
+            }
+        }
+        return 50
+    }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
