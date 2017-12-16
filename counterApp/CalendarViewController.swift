@@ -9,13 +9,19 @@
 import UIKit
 import JTAppleCalendar
 
+import os.log
+
 class CalendarViewController: UIViewController {
 
     let formatter = DateFormatter()
+    var selectedDate: Date?
+    
     
     @IBOutlet var calendarView: JTAppleCalendarView!
     @IBOutlet var year: UILabel!
     @IBOutlet var month: UILabel!
+    
+    @IBOutlet var doneBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,15 +59,29 @@ class CalendarViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        guard let button = sender as? UIBarButtonItem, button === doneBtn else {
+            print("*********** Canceling")
+            return
+        }
+        
+        print("Calling prepare")
+        formatter.dateFormat = "MM DD YYYY"
+        if (calendarView.selectedDates.count > 0)
+        {
+            selectedDate = calendarView.selectedDates[0]
+        }
+        
+        //formatter.string(from: date)
+        
+        
     }
-    */
 
 }
 
@@ -114,6 +134,9 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         guard let validCell = cell as? CustomCell else {return}
         
         setCellSelected(cell: validCell, cellState: cellState)
+        formatter.dateFormat = "MM DD YYYY"
+        print(formatter.string(from: date))
+        print("******* Test selection")
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -127,11 +150,5 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         
     }
 }
-
-
-
-
-
-
 
 

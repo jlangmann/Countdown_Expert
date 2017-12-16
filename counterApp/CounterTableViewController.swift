@@ -14,10 +14,10 @@ class CounterTableViewController: UITableViewController {
     var counters = [Counter]()
     
     @IBAction func unwindToCounterList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? ViewController, let counter = sourceViewController.counter {
+        if let sourceViewController = sender.source as? CreateCounterTableViewController, let counter = sourceViewController.counter {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing meal.
+                // Update an existing counter.
                 counters[selectedIndexPath.row] = counter
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -94,10 +94,8 @@ class CounterTableViewController: UITableViewController {
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
-        
         cell.setupCounter(date: counter.date)
-        
-        
+
         return cell
     }
 
@@ -149,7 +147,7 @@ class CounterTableViewController: UITableViewController {
                 os_log("Adding a new counter.", log: OSLog.default, type: .debug)
             
             case "ShowDetail":
-                guard let viewController = segue.destination as? ViewController else {
+                guard let viewController = segue.destination as? CreateCounterTableViewController else {
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
                 

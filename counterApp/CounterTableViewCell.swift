@@ -10,10 +10,10 @@ import UIKit
 
 class CounterTableViewCell: UITableViewCell {
 
-    @IBOutlet var dateLbl: UILabel!
     @IBOutlet var counterNameLbl: UILabel!
     @IBOutlet var countdownLbl: UILabel!
     @IBOutlet var img: UIImageView!
+    @IBOutlet var dateLbl: UILabel!
     
     var counterData = Date()
     
@@ -29,8 +29,8 @@ class CounterTableViewCell: UITableViewCell {
     }
     
     func setupCounter(date: Date) {
+        dateLbl.text = date.description
         counterData = date
-        dateLbl!.text = date.description
         Timer.scheduledTimer(timeInterval: 1.0, target: self,      selector: #selector(timerRunning), userInfo: nil, repeats: true)
     }
     

@@ -61,6 +61,7 @@
                                 <connections>
                                     <outlet property="countdownLbl" destination="ftz-U6-xBV" id="W50-Hy-gDD"/>
                                     <outlet property="counterNameLbl" destination="qWp-Ar-cdL" id="OeP-Z9-ucw"/>
+                                    <outlet property="dateLbl" destination="opo-a3-Nar" id="DjG-bS-fAE"/>
                                     <outlet property="img" destination="OQd-Ta-7HI" id="Uwu-qm-Vus"/>
                                     <segue destination="SsF-Ph-zr0" kind="showDetail" identifier="ShowDetail" id="OPn-JU-nTg"/>
                                 </connections>
@@ -102,7 +103,11 @@
                                             <segue destination="kP4-m3-Lr2" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="Auj-di-Gje"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem key="rightBarButtonItem" systemItem="save" id="ulO-w0-wmy"/>
+                                    <barButtonItem key="rightBarButtonItem" systemItem="save" id="ulO-w0-wmy">
+                                        <connections>
+                                            <segue destination="kP4-m3-Lr2" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="nly-EY-guV"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </navigationItem>
                             </items>
                         </navigationBar>
@@ -138,7 +143,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Select Date"/>
                                                     <connections>
-                                                        <segue destination="DbA-nf-BKm" kind="presentation" id="DlB-Rv-yel"/>
+                                                        <segue destination="DbA-nf-BKm" kind="presentation" identifier="selectDate" id="DlB-Rv-yel"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="dateLbl" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U69-TF-YOO">
@@ -232,9 +237,11 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="dateLbl" destination="U69-TF-YOO" id="YHt-5f-tQz"/>
                         <outlet property="editImgBtn" destination="pyP-Vr-CPd" id="Za5-NO-WId"/>
                         <outlet property="nameTextField" destination="Wvj-Iv-zh7" id="D3F-Q2-0Z7"/>
                         <outlet property="photoImageView" destination="lg3-oz-bkv" id="dAS-wh-pHc"/>
+                        <outlet property="saveButton" destination="ulO-w0-wmy" id="w3U-vX-Uqi"/>
                         <outlet property="timeLbl" destination="6N8-tw-aYD" id="O98-wq-Q4Z"/>
                         <outlet property="timePicker" destination="4pj-jd-rn0" id="1Xy-qH-QDR"/>
                     </connections>
@@ -404,12 +411,12 @@
                                     <navigationItem title="Select Date" id="epD-xg-hXc">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fwF-hl-0Cv">
                                             <connections>
-                                                <segue destination="dZZ-76-eZd" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="Po7-Op-QLI"/>
+                                                <segue destination="SsF-Ph-zr0" kind="show" id="zuz-Dj-QE8"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="FOL-4S-FsB">
                                             <connections>
-                                                <segue destination="dZZ-76-eZd" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="Lvw-YD-pHN"/>
+                                                <segue destination="dZZ-76-eZd" kind="unwind" unwindAction="unwindFromCalendarWithSender:" id="iEm-Yl-JuE"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -426,6 +433,7 @@
                     </view>
                     <connections>
                         <outlet property="calendarView" destination="ZuS-v0-96d" id="lgz-dh-7mO"/>
+                        <outlet property="doneBtn" destination="FOL-4S-FsB" id="55E-Ua-5W0"/>
                         <outlet property="month" destination="Cbd-5Z-0hw" id="Jdl-QZ-B6O"/>
                         <outlet property="year" destination="tE4-hY-fqy" id="g9M-2S-bAl"/>
                     </connections>
@@ -433,7 +441,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ad2-93-wNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dZZ-76-eZd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="943" y="132"/>
+            <point key="canvasLocation" x="1145" y="20"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0g3-Su-ibS">
