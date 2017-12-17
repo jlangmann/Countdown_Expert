@@ -17,6 +17,7 @@ class Counter: NSObject, NSCoding {
         static let name = "name"
         static let photo = "photo"
         static let date = "date"
+        static let time = "time"
     }
     
     // Archive properties
@@ -26,12 +27,15 @@ class Counter: NSObject, NSCoding {
     var name: String
     var photo: UIImage?
     var date: Date
+    var time: Date
  
     // NSCoding
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: PropertyKey.name)
         aCoder.encode(photo, forKey: PropertyKey.photo)
         aCoder.encode(date, forKey: PropertyKey.date)
+        aCoder.encode(time, forKey:
+            PropertyKey.time)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -43,10 +47,10 @@ class Counter: NSObject, NSCoding {
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         let date = aDecoder.decodeObject(forKey: PropertyKey.date) as? Date
         // Must call designated initializer.
-        self.init(name: name, photo: photo!, date: date!)
+        self.init(name: name, photo: photo!, date: date!, time: date!)
     }
     
-    init?(name: String, photo: UIImage?, date: Date) {
+    init?(name: String, photo: UIImage?, date: Date, time: Date) {
         
         if name.isEmpty {
             return nil
@@ -55,6 +59,7 @@ class Counter: NSObject, NSCoding {
         self.name = name
         self.photo = photo
         self.date = date
+        self.time = time
         
     }
 }

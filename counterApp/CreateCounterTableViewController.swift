@@ -9,44 +9,78 @@
 import UIKit
 import os.log
 
-class CreateCounterTableViewController: UITableViewController {
+class CreateCounterTableViewController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var timeCellExpanded: Bool = false
     let formatter = DateFormatter()
     
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var editImgBtn: UIButton!
     @IBOutlet var timePicker: UIDatePicker!
     @IBOutlet var dateLbl: UILabel!
     @IBOutlet var timeLbl: UILabel!
     @IBOutlet var saveButton: UIBarButtonItem!
+    @IBOutlet var editImageBtn: UIButton!
     
     var counter: Counter?
     var selectedDate:Date = Date()
+    
+    @IBAction func editImage(_ sender: Any) {
+        // Hide the keyboard.
+        nameTextField.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .photoLibrary
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // The info dictionary may contain multiple representations of the image. You want to use the original.
+        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        // Set photoImageView to display the selected image.
+        photoImageView.image = selectedImage
+        
+        // Dismiss the picker.
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // Dismiss the picker if the user canceled.
+        dismiss(animated: true, completion: nil)
+    }
 
     @IBAction func timePicked(_ sender: Any) {
         formatter.dateFormat = "HH:mm:ss a"
         timeLbl.text = formatter.string(from: timePicker.date)
     }
     
-    @IBAction func doneAction(_ sender: Any) {
-        // DOne
-        
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         formatter.dateFormat = "HH:mm:ss a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
+
+        nameTextField.delegate = self
         
+        if let counter = counter {
+            navigationItem.title = counter.name
+            nameTextField.text = counter.name
+            photoImageView.image = counter.photo
+            selectedDate = counter.date
+            timePicker.date = counter.date
+        }
         timeLbl.text = formatter.string(from: timePicker.date)
-        
-        formatter.dateFormat = "MM DD YYYY"
-        dateLbl.text = formatter.string(from:Date())
-        selectedDate = Date()
+        formatter.dateStyle = .long
+        dateLbl.text = formatter.string(from:selectedDate)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -151,14 +185,14 @@ class CreateCounterTableViewController: UITableViewController {
             self.present(alertController, animated: true, completion: nil)
             
         }
-        counter = Counter(name: name, photo: photo1, date: selectedDate)
-        
+        print("Saving new counter!")
+        counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date)
     }
+
     @IBAction func unwindFromCalendar(sender: UIStoryboardSegue) {
-        if let calendarController = sender.source as? CalendarViewController, let selectedDate2 = calendarController.selectedDate {
-            
-            selectedDate = selectedDate2
-            formatter.dateFormat = "MM DD YYYY"
+        if let calendarController = sender.source as? CalendarViewController, let selDate = calendarController.selectedDate {
+            selectedDate = selDate
+            formatter.dateStyle = .long
             dateLbl.text = formatter.string(from:selectedDate)
         }
     }

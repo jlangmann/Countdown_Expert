@@ -203,9 +203,10 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyP-Vr-CPd">
                                                             <rect key="frame" x="0.0" y="7.5" width="295" height="30"/>
+                                                            <gestureRecognizers/>
                                                             <state key="normal" title="Change Photo"/>
                                                             <connections>
-                                                                <action selector="editPhotoAction:" destination="SsF-Ph-zr0" eventType="touchUpInside" id="JtQ-lr-4Pk"/>
+                                                                <action selector="editImage:" destination="SsF-Ph-zr0" eventType="touchUpInside" id="QC9-la-ZTw"/>
                                                             </connections>
                                                         </button>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" highlightedImage="defaultPhoto" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lg3-oz-bkv">
@@ -238,7 +239,7 @@
                     </tableView>
                     <connections>
                         <outlet property="dateLbl" destination="U69-TF-YOO" id="YHt-5f-tQz"/>
-                        <outlet property="editImgBtn" destination="pyP-Vr-CPd" id="Za5-NO-WId"/>
+                        <outlet property="editImageBtn" destination="pyP-Vr-CPd" id="IaY-YI-TUB"/>
                         <outlet property="nameTextField" destination="Wvj-Iv-zh7" id="D3F-Q2-0Z7"/>
                         <outlet property="photoImageView" destination="lg3-oz-bkv" id="dAS-wh-pHc"/>
                         <outlet property="saveButton" destination="ulO-w0-wmy" id="w3U-vX-Uqi"/>
@@ -249,7 +250,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7A4-B3-tYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="kP4-m3-Lr2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="80.799999999999997" y="131.78410794602701"/>
+            <point key="canvasLocation" x="244" y="92"/>
         </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="eDR-KY-5sg">
@@ -466,6 +467,6 @@
         <image name="defaultPhoto" width="4674" height="3336"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Iq-Lg-HMm"/>
+        <segue reference="OPn-JU-nTg"/>
     </inferredMetricsTieBreakers>
 </document>

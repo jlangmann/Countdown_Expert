@@ -67,11 +67,8 @@ class CalendarViewController: UIViewController {
         // Pass the selected object to the new view controller.
         
         guard let button = sender as? UIBarButtonItem, button === doneBtn else {
-            print("*********** Canceling")
             return
         }
-        
-        print("Calling prepare")
         formatter.dateFormat = "MM DD YYYY"
         if (calendarView.selectedDates.count > 0)
         {
@@ -135,8 +132,6 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         
         setCellSelected(cell: validCell, cellState: cellState)
         formatter.dateFormat = "MM DD YYYY"
-        print(formatter.string(from: date))
-        print("******* Test selection")
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
