@@ -20,24 +20,14 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var dateLbl: UILabel!
     @IBOutlet var timeLbl: UILabel!
     @IBOutlet var saveButton: UIBarButtonItem!
-    @IBOutlet var editImageBtn: UIButton!
+    @IBOutlet var editImgBtn: UIButton!
+    @IBOutlet var caretLbl: UILabel!
     
     var counter: Counter?
     var selectedDate:Date = Date()
     
-    @IBAction func editImage(_ sender: Any) {
-        // Hide the keyboard.
-        nameTextField.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
-        let imagePickerController = UIImagePickerController()
-        
-        // Only allow photos to be picked, not taken.
-        imagePickerController.sourceType = .photoLibrary
-        
-        // Make sure ViewController is notified when the user picks an image.
-        imagePickerController.delegate = self
-        present(imagePickerController, animated: true, completion: nil)
+    @IBAction func selectImage(_ sender: Any) {
+        _chooseImage()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -61,6 +51,28 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         formatter.dateFormat = "HH:mm:ss a"
         timeLbl.text = formatter.string(from: timePicker.date)
     }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+
+    func _chooseImage() {
+        // Select photo from photo gallery
+        // Hide the keyboard.
+        nameTextField.resignFirstResponder()
+        
+        // UIImagePickerController is a view controller that
+        // lets a user pick media from their photo library.
+        let imagePickerController = UIImagePickerController()
+        
+        // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .photoLibrary
+        
+        // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +88,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             nameTextField.text = counter.name
             photoImageView.image = counter.photo
             selectedDate = counter.date
-            timePicker.date = counter.date
+            timePicker.date = counter.time
         }
         timeLbl.text = formatter.string(from: timePicker.date)
         formatter.dateStyle = .long
@@ -97,16 +109,26 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 2
+        
+        if (indexPath.row == 1){
+            performSegue(withIdentifier: "selectDate", sender: nil)
+        }
+        else if indexPath.row == 2
         {
             if timeCellExpanded{
                 timeCellExpanded = false
+                caretLbl.text = ">"
             }
             else {
                 timeCellExpanded = true
+                caretLbl.text = "v"
             }
             tableView.beginUpdates()
             tableView.endUpdates()
+        }
+        else if (indexPath.row == 3)
+        {
+            _chooseImage()
         }
     }
     
@@ -167,6 +189,26 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
 
     // MARK: - Navigation
 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        let button = sender as? UIBarButtonItem
+        if (button != nil && button == saveButton)
+        {
+            let name = nameTextField.text ?? ""
+            if (name == "")
+            {
+                nameTextField.text = "Untitled Counter"
+                /*
+                let alertController = UIAlertController(title: "Cannot Save Counter", message: "Invalid counter name", preferredStyle: .alert)
+                let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(OKAction)
+                self.present(alertController, animated: true, completion: nil)
+                return false
+                */
+            }
+        }
+        return true
+    }
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -177,15 +219,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         }
         let name = nameTextField.text ?? ""
         let photo1 = photoImageView.image
-        if (name == "")
-        {
-            let alertController = UIAlertController(title: "Cannot Save Counter", message: "Invalid counter name", preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(OKAction)
-            self.present(alertController, animated: true, completion: nil)
-            
-        }
-        print("Saving new counter!")
+
         counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date)
     }
 

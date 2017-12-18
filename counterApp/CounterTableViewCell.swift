@@ -10,12 +10,14 @@ import UIKit
 
 class CounterTableViewCell: UITableViewCell {
 
+    let formatter = DateFormatter()
+    
     @IBOutlet var counterNameLbl: UILabel!
     @IBOutlet var countdownLbl: UILabel!
     @IBOutlet var img: UIImageView!
     @IBOutlet var dateLbl: UILabel!
     
-    var counterData = Date()
+    var counterDate = Date()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,20 +31,22 @@ class CounterTableViewCell: UITableViewCell {
     }
     
     func setupCounter(date: Date) {
-        dateLbl.text = date.description
-        counterData = date
+        formatter.dateFormat = "MMMM dd, yyyy HH:mm"
+        dateLbl.text = formatter.string(from: date)
+        print("*** WTF: " + date.description(with: Locale.current))
+        counterDate = date
         Timer.scheduledTimer(timeInterval: 1.0, target: self,      selector: #selector(timerRunning), userInfo: nil, repeats: true)
     }
     
     @objc func timerRunning() {
         let now = Date()
-        let timeRemaining = (counterData.timeIntervalSince(now))
+        let timeRemaining = (counterDate.timeIntervalSince(now))
         
         if (Int(timeRemaining) > 0)
         {
             let calendar = Calendar.current
             
-            let diffDateComponents = calendar.dateComponents([.day , .hour , .minute , .second], from: now, to: counterData)
+            let diffDateComponents = calendar.dateComponents([.day , .hour , .minute , .second], from: now, to: counterDate)
             
             let days = Int(diffDateComponents.day!)
             let hours = Int(diffDateComponents.hour!)

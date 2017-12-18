@@ -28,6 +28,8 @@ class CalendarViewController: UIViewController {
 
         calendarView.scrollToDate(Date(), animateScroll: false)
         calendarView.selectDates([Date()])
+        calendarView.scrollingMode = ScrollingMode.stopAtEachCalendarFrame
+        
         // Do any additional setup after loading the view.
         setupCalendarView()
     }

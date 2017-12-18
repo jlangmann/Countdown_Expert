@@ -94,11 +94,29 @@ class CounterTableViewController: UITableViewController {
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
-        cell.setupCounter(date: counter.date)
-
+        
+        // Get combined date from date and tim
+        let combinedDate = combineDateWithTime(date: counter.date, time: counter.time)
+        cell.setupCounter(date: combinedDate!)
         return cell
     }
 
+    func combineDateWithTime(date: Date, time: Date) -> Date? {
+        let calendar = NSCalendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+        
+        var mergedComponments = DateComponents()
+        mergedComponments.year = dateComponents.year!
+        mergedComponments.month = dateComponents.month!
+        mergedComponments.day = dateComponents.day!
+        mergedComponments.hour = timeComponents.hour!
+        mergedComponments.minute = timeComponents.minute!
+        mergedComponments.second = timeComponents.second!
+        
+        return calendar.date(from: mergedComponments)
+    }
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
