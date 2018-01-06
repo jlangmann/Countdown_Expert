@@ -73,7 +73,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Countdowns" id="ZcF-6I-rXk">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Pti-8v-N4m"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="sSb-r9-nCy">
                             <connections>
                                 <segue destination="SsF-Ph-zr0" kind="presentation" identifier="AddItem" id="2Iq-Lg-HMm"/>
@@ -258,7 +257,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7A4-B3-tYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="kP4-m3-Lr2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="244" y="92"/>
+            <point key="canvasLocation" x="169" y="95"/>
         </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="eDR-KY-5sg">
@@ -470,7 +469,6 @@
         <image name="defaultPhoto" width="4674" height="3336"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DlB-Rv-yel"/>
-        <segue reference="zuz-Dj-QE8"/>
+        <segue reference="2Iq-Lg-HMm"/>
     </inferredMetricsTieBreakers>
 </document>

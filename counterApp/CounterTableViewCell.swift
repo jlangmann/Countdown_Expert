@@ -33,7 +33,6 @@ class CounterTableViewCell: UITableViewCell {
     func setupCounter(date: Date) {
         formatter.dateFormat = "MMMM dd, yyyy HH:mm"
         dateLbl.text = formatter.string(from: date)
-        print("*** WTF: " + date.description(with: Locale.current))
         counterDate = date
         Timer.scheduledTimer(timeInterval: 1.0, target: self,      selector: #selector(timerRunning), userInfo: nil, repeats: true)
     }
@@ -70,11 +69,25 @@ class CounterTableViewCell: UITableViewCell {
                 countdown = countdown + "\(seconds) Seconds"
             }
             countdownLbl!.text = countdown
+            self.backgroundColor = UIColor.white
+            countdownLbl.textColor = UIColor.black
+            counterNameLbl.textColor = UIColor.black
         }
         else {
             countdownLbl!.text = String(0)
+            self.backgroundColor = getColorByHex(rgbHexValue: 0xfc3d39)
+            countdownLbl.textColor = UIColor.white
+            counterNameLbl.textColor = UIColor.white
         }
-        
     }
+    
+    func getColorByHex(rgbHexValue:UInt32, alpha:Double = 1.0) -> UIColor {
+        let red = Double((rgbHexValue & 0xFF0000) >> 16) / 256.0
+        let green = Double((rgbHexValue & 0xFF00) >> 8) / 256.0
+        let blue = Double((rgbHexValue & 0xFF)) / 256.0
+        
+        return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
+    }
+    
 
 }

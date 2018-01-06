@@ -55,10 +55,21 @@ class CounterTableViewController: UITableViewController {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
     }
 
+    /*
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.counters[sourceIndexPath.row]
+        print("*** MOVING AT poS: ")
+        print(sourceIndexPath.row)
+        counters.remove(at: sourceIndexPath.row)
+        counters.insert(movedObject, at: destinationIndexPath.row)
+        os_log("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(counters)")
+        // To check for correctness enable: self.tableView.reloadData()
+    }
+    */
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = editButtonItem
         
         if let savedCountdowns = loadCountdowns() {
             counters += savedCountdowns
