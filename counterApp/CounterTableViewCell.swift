@@ -31,7 +31,10 @@ class CounterTableViewCell: UITableViewCell {
     }
     
     func setupCounter(date: Date) {
-        formatter.dateFormat = "MMMM dd, yyyy HH:mm"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "MMMM dd, yyyy h:mm a"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
         dateLbl.text = formatter.string(from: date)
         counterDate = date
         Timer.scheduledTimer(timeInterval: 1.0, target: self,      selector: #selector(timerRunning), userInfo: nil, repeats: true)

@@ -77,7 +77,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        formatter.dateFormat = "HH:mm:ss a"
+        formatter.dateFormat = "h:mm:ss a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
 
@@ -219,8 +219,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         }
         let name = nameTextField.text ?? ""
         let photo1 = photoImageView.image
-
-        counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date)
+        counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date, createdAt: Date())
     }
 
     @IBAction func unwindFromCalendar(sender: UIStoryboardSegue) {

@@ -13,6 +13,8 @@ class CounterTableViewController: UITableViewController {
 
     var counters = [Counter]()
     
+    let defaults = UserDefaults.standard
+    
     @IBAction func unwindToCounterList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? CreateCounterTableViewController, let counter = sourceViewController.counter {
             
@@ -24,23 +26,18 @@ class CounterTableViewController: UITableViewController {
             else {
                 saveCountdowns()
                 
-                // Add a new meal.
+                // Add a new counter.
                 let newIndexPath = IndexPath(row: counters.count, section: 0)
                 
                 counters.append(counter)
+                counters = sortCountdowns(counters)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
+                tableView.beginUpdates()
+                tableView.endUpdates()
+                
             }
         }
     }
-    
-    private func loadSampleCounters() {
-       // let photo1 = UIImage(named: "defaultPhoto")
-       // guard let counter1 = Counter(name: "Birthday", photo: photo1, date: Date()) else {
-       //     fatalError("Unable to instantiate meal1")
-        // }
-        counters = []
-    }
-    
     
     private func saveCountdowns() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(counters, toFile: Counter.ArchiveURL.path)
@@ -69,16 +66,37 @@ class CounterTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        if let savedCountdowns = loadCountdowns() {
-            counters += savedCountdowns
+        navigationController?.isNavigationBarHidden = false
+        let savedCountdowns = loadCountdowns()
+        if (savedCountdowns! != [])  {
+            counters += savedCountdowns!
         }
+        
+        print("Calling view did load")
+        counters = sortCountdowns(counters)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func sortCountdowns(_ countdowns: [Counter]) -> [Counter] {
+        if (defaults.bool(forKey: "sortByDate"))
+        {
+            print("**** SORTING By DATE!!!!")
+            return countdowns.sorted(by: { $0.date < $1.date })
+        }
+        else {
+            return countdowns.sorted(by: { $0.createdAt < $1.createdAt })
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -163,6 +181,7 @@ class CounterTableViewController: UITableViewController {
 
     // MARK: - Navigation
 
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -191,8 +210,11 @@ class CounterTableViewController: UITableViewController {
                 let selCounter = counters[indexPath.row]
                 viewController.counter = selCounter
             
+            case "ShowSettings":
+                print("Show settings")
+
             default:
-                fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
+                print("Unexpected Segue Identifier; \(segue.identifier ?? "")")
         }
     
     }
