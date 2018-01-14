@@ -17,9 +17,12 @@ class CalendarViewController: UIViewController {
     var selectedDate: Date?
     
     
+    @IBOutlet var todayBtn: UIButton!
     @IBOutlet var calendarView: JTAppleCalendarView!
     @IBOutlet var year: UILabel!
     @IBOutlet var month: UILabel!
+    @IBOutlet var expandBtn: UIButton!
+    @IBOutlet var monthYearView: UIView!
     
     @IBOutlet var doneBtn: UIBarButtonItem!
     
@@ -32,6 +35,13 @@ class CalendarViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setupCalendarView()
+    }
+
+    
+    @IBAction func todayBtnClicked(_ sender: Any) {
+        calendarView.deselectAllDates()
+        calendarView.scrollToDate(Date(), animateScroll: false)
+        calendarView.selectDates([Date()])
     }
     
     func setupCalendarView() {
@@ -81,6 +91,15 @@ class CalendarViewController: UIViewController {
         
         
     }
+    
+    @IBAction func unwindFromPopup(sender: UIStoryboardSegue) {
+        if let popupController = sender.source as? PopupViewController {
+            let selDate = popupController.popupDatePicker.date
+            calendarView.deselectAllDates()
+            calendarView.scrollToDate(selDate, animateScroll: false)
+            calendarView.selectDates([selDate])
+        }
+    }
 
 }
 
@@ -119,6 +138,8 @@ func setCellSelected(cell: CustomCell, cellState: CellState)
         }
     }
 }
+
+
 
 extension CalendarViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {

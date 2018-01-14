@@ -26,12 +26,137 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "counterApp/SettingsTableViewController.swift"
-            timestampString = "537086813.471284"
+            timestampString = "537594542.7436219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
             endingLineNumber = "53"
             landmarkName = "SettingsTableViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "counterApp/CreateCounterTableViewController.swift"
+            timestampString = "537660482.375077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "CreateCounterTableViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "counterApp.CreateCounterTableViewController.caretLbl.getter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UILabel&gt;"
+                  moduleName = "counterApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Julie/Desktop/apps/counterApp/counterApp/CreateCounterTableViewController.swift"
+                  timestampString = "537593336.49499"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "counterApp.CreateCounterTableViewController.caretLbl.setter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UILabel&gt;"
+                  moduleName = "counterApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Julie/Desktop/apps/counterApp/counterApp/CreateCounterTableViewController.swift"
+                  timestampString = "537593336.505047"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "counterApp.CreateCounterTableViewController.init(style: __C.UITableViewStyle) -&gt; counterApp.CreateCounterTableViewController"
+                  moduleName = "counterApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Julie/Desktop/apps/counterApp/counterApp/CreateCounterTableViewController.swift"
+                  timestampString = "537593336.507507"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "776">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "counterApp.CreateCounterTableViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; counterApp.CreateCounterTableViewController"
+                  moduleName = "counterApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Julie/Desktop/apps/counterApp/counterApp/CreateCounterTableViewController.swift"
+                  timestampString = "537593336.5096641"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "820">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "counterApp.CreateCounterTableViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;counterApp.CreateCounterTableViewController&gt;"
+                  moduleName = "counterApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Julie/Desktop/apps/counterApp/counterApp/CreateCounterTableViewController.swift"
+                  timestampString = "537593336.511732"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "776">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "counterApp/CreateCounterTableViewController.swift"
+            timestampString = "537660482.383512"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "selectImage(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "counterApp/CalendarViewController.swift"
+            timestampString = "537660482.385345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "CalendarViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

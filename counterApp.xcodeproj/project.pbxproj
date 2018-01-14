@@ -12,6 +12,7 @@
 		E370B4731FD52DEB00F6F986 /* CreateCounterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */; };
 		E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */; };
 		E3712EBE1FCE837B00EDFE16 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */; };
+		E3A2B754200B38F100A7E912 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A2B753200B38F100A7E912 /* PopupViewController.swift */; };
 		E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */; };
 		E3BF7E881FC3EB0A00B75C43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3BF7E861FC3EB0A00B75C43 /* Main.storyboard */; };
 		E3BF7E8A1FC3EB0A00B75C43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3BF7E891FC3EB0A00B75C43 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCounterTableViewController.swift; sourceTree = "<group>"; };
 		E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		E3712EBD1FCE837B00EDFE16 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		E3A2B753200B38F100A7E912 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		E3BF7E7F1FC3EB0A00B75C43 /* counterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = counterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				E3BF7E821FC3EB0A00B75C43 /* AppDelegate.swift */,
 				E3BF7E841FC3EB0A00B75C43 /* ViewController.swift */,
 				E3BF7E861FC3EB0A00B75C43 /* Main.storyboard */,
+				E3A2B753200B38F100A7E912 /* PopupViewController.swift */,
 				E3EFE9C72002DB8E0014A875 /* SettingsTableViewController.swift */,
 				E3591FD9200191680033F466 /* MainViewController.swift */,
 				E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */,
@@ -245,6 +248,7 @@
 				E3BF7E831FC3EB0A00B75C43 /* AppDelegate.swift in Sources */,
 				E370B4731FD52DEB00F6F986 /* CreateCounterTableViewController.swift in Sources */,
 				E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */,
+				E3A2B754200B38F100A7E912 /* PopupViewController.swift in Sources */,
 				E3712EBE1FCE837B00EDFE16 /* CalendarViewController.swift in Sources */,
 				E3BF7E951FC3F0E300B75C43 /* CounterTableViewCell.swift in Sources */,
 				E3591FDA200191680033F466 /* MainViewController.swift in Sources */,

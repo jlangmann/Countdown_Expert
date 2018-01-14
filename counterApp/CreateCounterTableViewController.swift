@@ -14,6 +14,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     var timeCellExpanded: Bool = false
     let formatter = DateFormatter()
     
+    @IBOutlet var caretImg: UIImageView!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var timePicker: UIDatePicker!
@@ -21,7 +22,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var timeLbl: UILabel!
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var editImgBtn: UIButton!
-    @IBOutlet var caretLbl: UILabel!
     
     var counter: Counter?
     var selectedDate:Date = Date()
@@ -117,11 +117,11 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         {
             if timeCellExpanded{
                 timeCellExpanded = false
-                caretLbl.text = ">"
+                caretImg.image = UIImage(named: "arrowCollapse")
             }
             else {
                 timeCellExpanded = true
-                caretLbl.text = "v"
+                caretImg.image = UIImage(named: "arrowExpand")
             }
             tableView.beginUpdates()
             tableView.endUpdates()
