@@ -13,10 +13,11 @@ class SettingsTableViewController: UITableViewController {
     var cellExpanded: Bool = false
     @IBOutlet var sortByDateBtn: UIButton!
     @IBOutlet var sortByCreatedBtn: UIButton!
+    @IBOutlet var pushNotificationSwitch: UISwitch!
     
     let defaults = UserDefaults.standard
     let sortByDateConstant = "sortByDate"
-    
+    let notificationAccess = "notificationAccess"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,11 +26,6 @@ class SettingsTableViewController: UITableViewController {
         } else {
             sortByCreatedBtn.isSelected = true
         }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     @IBAction func createdBtnClick(_ sender: UIButton) {
@@ -48,6 +44,9 @@ class SettingsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func pushNotificationAction(_ sender: Any) {
+        defaults.set(pushNotificationSwitch.isOn, forKey: notificationAccess)
+    }
     
 
     // MARK: - Table view data source

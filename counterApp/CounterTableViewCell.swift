@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class CounterTableViewCell: UITableViewCell {
 
@@ -16,12 +17,16 @@ class CounterTableViewCell: UITableViewCell {
     @IBOutlet var countdownLbl: UILabel!
     @IBOutlet var img: UIImageView!
     @IBOutlet var dateLbl: UILabel!
+    @IBOutlet var deleteBtn: UIButton!
     
     var counterDate = Date()
+    
+    var sentNotification: Bool = false;
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        deleteBtn.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -75,12 +80,41 @@ class CounterTableViewCell: UITableViewCell {
             self.backgroundColor = UIColor.white
             countdownLbl.textColor = UIColor.black
             counterNameLbl.textColor = UIColor.black
+            deleteBtn.isHidden = true
         }
         else {
+        
+            deleteBtn.isHidden = false
             countdownLbl!.text = String(0)
             self.backgroundColor = getColorByHex(rgbHexValue: 0xfc3d39)
             countdownLbl.textColor = UIColor.white
             counterNameLbl.textColor = UIColor.white
+
+            if (!sentNotification && UserDefaults.standard.bool(forKey: "notificationAccess"))
+            {
+                sentNotification = true
+                //Set the content of the notification
+                let content = UNMutableNotificationContent()
+                content.title = counterNameLbl.text! + " Coundown Complete!"
+                content.subtitle = dateLbl.text!
+                content.body = counterNameLbl.text! + " is complete!"
+                
+                //Set the trigger of the notification -- here a timer.
+                let trigger = UNTimeIntervalNotificationTrigger(
+                    timeInterval: 1.0,
+                    repeats: false)
+                
+                //Set the request for the notification from the above
+                let request = UNNotificationRequest(
+                    identifier: "1.second.message",
+                    content: content,
+                    trigger: trigger
+                )
+
+                //Add the notification to the currnet notification center
+                UNUserNotificationCenter.current().add(
+                    request, withCompletionHandler: nil)
+            }
         }
     }
     
@@ -92,5 +126,4 @@ class CounterTableViewCell: UITableViewCell {
         return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
     }
     
-
 }

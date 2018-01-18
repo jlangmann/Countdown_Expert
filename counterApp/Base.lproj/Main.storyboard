@@ -56,12 +56,23 @@
                                             <color key="textColor" red="0.0" green="0.1908044440863268" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBC-5N-6Mm">
+                                            <rect key="frame" x="334" y="37" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="trash">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="deleteCell:" destination="UKO-YP-Rxc" eventType="touchUpInside" id="enm-2d-VvJ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="countdownLbl" destination="ftz-U6-xBV" id="W50-Hy-gDD"/>
                                     <outlet property="counterNameLbl" destination="qWp-Ar-cdL" id="OeP-Z9-ucw"/>
                                     <outlet property="dateLbl" destination="opo-a3-Nar" id="DjG-bS-fAE"/>
+                                    <outlet property="deleteBtn" destination="CBC-5N-6Mm" id="fbl-PX-atL"/>
                                     <outlet property="img" destination="OQd-Ta-7HI" id="Uwu-qm-Vus"/>
                                     <segue destination="SsF-Ph-zr0" kind="showDetail" identifier="ShowDetail" id="OPn-JU-nTg"/>
                                 </connections>
@@ -210,6 +221,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDW-bB-nqU">
                                                     <rect key="frame" x="310" y="6" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="pushNotificationAction:" destination="V1d-o2-Jz3" eventType="valueChanged" id="gg5-8a-PT5"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -231,6 +245,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="pushNotificationSwitch" destination="rDW-bB-nqU" id="aYJ-Ku-svB"/>
                         <outlet property="sortByCreatedBtn" destination="5mo-ig-qXc" id="dFp-HB-D29"/>
                         <outlet property="sortByDateBtn" destination="qPH-an-lQp" id="oZQ-AO-end"/>
                     </connections>
@@ -238,7 +253,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMa-RF-lfH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="J2d-xK-MB4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="633" y="878"/>
+            <point key="canvasLocation" x="169" y="826"/>
         </scene>
         <!--Create Counter Table View Controller-->
         <scene sceneID="Qun-R9-xJD">
@@ -252,7 +267,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
-                                <navigationItem title="Add Countdown" id="GDt-pH-f7X">
+                                <navigationItem title="Create Countdown" id="GDt-pH-f7X">
                                     <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="i9Z-xy-bPo">
                                         <connections>
                                             <segue destination="kP4-m3-Lr2" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="Auj-di-Gje"/>
@@ -388,6 +403,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ryZ-9A-Vee">
+                                        <rect key="frame" x="0.0" y="426" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ryZ-9A-Vee" id="dbi-pB-7uY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Holiday Preset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuV-j4-rmc">
+                                                    <rect key="frame" x="16" y="11" width="146" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrowCollapse" translatesAutoresizingMaskIntoConstraints="NO" id="8Zr-FL-S6H">
+                                                    <rect key="frame" x="98" y="-37" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -445,56 +481,48 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9OL-9K-6Bv">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Lpe-fX-aAO">
-                                                <rect key="frame" x="0.0" y="10" width="371" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" ambiguous="YES" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="76Z-pp-Vne">
+                                                <rect key="frame" x="2" y="10" width="355" height="30"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="TopLeft" semanticContentAttribute="forceRightToLeft" ambiguous="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="76Z-pp-Vne">
-                                                        <rect key="frame" x="0.0" y="0.0" width="371" height="30"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALo-pU-F4a">
-                                                                <rect key="frame" x="160.5" y="0.0" width="210.5" height="30"/>
-                                                                <state key="normal" title="Today">
-                                                                    <color key="titleColor" red="0.95539449303076873" green="0.95686274510000002" blue="0.12463866721145778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="todayBtn:" destination="dZZ-76-eZd" eventType="touchUpInside" id="iPn-2Z-fUb"/>
-                                                                    <action selector="todayBtnClicked:" destination="DbA-nf-BKm" eventType="touchUpInside" id="hYb-ce-3DB"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEw-vA-Ays">
-                                                                <rect key="frame" x="120.5" y="0.0" width="30" height="30"/>
-                                                                <state key="normal" title="&gt;">
-                                                                    <color key="titleColor" red="1" green="0.99842091519999998" blue="0.97316984380000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <segue destination="8Ge-Qg-HUp" kind="presentation" identifier="popupDate" id="0Kd-DC-nxL"/>
-                                                                </connections>
-                                                            </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE4-hY-fqy">
-                                                                <rect key="frame" x="77.5" y="5" width="33" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1" ambiguous="YES" text="Month" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="Cbd-5Z-0hw">
-                                                                <rect key="frame" x="0.0" y="0.5" width="67.5" height="29"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALo-pU-F4a">
+                                                        <rect key="frame" x="157" y="0.0" width="198" height="30"/>
+                                                        <state key="normal" title="Today">
+                                                            <color key="titleColor" red="0.95539449303076873" green="0.95686274510000002" blue="0.12463866721145778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="todayBtn:" destination="dZZ-76-eZd" eventType="touchUpInside" id="iPn-2Z-fUb"/>
+                                                            <action selector="todayBtnClicked:" destination="DbA-nf-BKm" eventType="touchUpInside" id="hYb-ce-3DB"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEw-vA-Ays">
+                                                        <rect key="frame" x="122" y="0.0" width="30" height="30"/>
+                                                        <state key="normal" image="whiteArrow">
+                                                            <color key="titleColor" red="1" green="0.99842091519999998" blue="0.97316984380000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <segue destination="8Ge-Qg-HUp" kind="presentation" identifier="popupDate" id="0Kd-DC-nxL"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE4-hY-fqy">
+                                                        <rect key="frame" x="72.5" y="0.5" width="44.5" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1" ambiguous="YES" text="Month" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="Cbd-5Z-0hw">
+                                                        <rect key="frame" x="0.0" y="0.5" width="67.5" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="76Z-pp-Vne" secondAttribute="trailing" constant="5" id="Q9k-X9-57a"/>
-                                                    <constraint firstItem="76Z-pp-Vne" firstAttribute="leading" secondItem="Lpe-fX-aAO" secondAttribute="leading" constant="5" id="Vu2-fC-edX"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Lpe-fX-aAO" firstAttribute="leading" secondItem="9OL-9K-6Bv" secondAttribute="leading" constant="2" id="HzY-nW-Xkr"/>
-                                            <constraint firstAttribute="trailing" secondItem="Lpe-fX-aAO" secondAttribute="trailing" constant="2" id="K2S-nZ-yi2"/>
+                                            <constraint firstItem="76Z-pp-Vne" firstAttribute="top" secondItem="9OL-9K-6Bv" secondAttribute="top" constant="10" id="4pq-XY-uCx"/>
+                                            <constraint firstAttribute="trailing" secondItem="76Z-pp-Vne" secondAttribute="trailing" constant="10" id="dyO-Hu-ITs"/>
+                                            <constraint firstItem="76Z-pp-Vne" firstAttribute="leading" secondItem="9OL-9K-6Bv" secondAttribute="leading" constant="10" id="wIf-ou-ave"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WRl-di-Xvb">
@@ -655,18 +683,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJw-8S-28K">
-                                <rect key="frame" x="61" y="170" width="252" height="288"/>
+                                <rect key="frame" x="39" y="119" width="296" height="338"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="PW0-h3-HAh">
-                                        <rect key="frame" x="0.0" y="36" width="252" height="171"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="537606125.46614003">
-                                            <!--2018-01-14 07:02:05 +0000-->
-                                        </date>
-                                    </datePicker>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UkN-bU-qZi">
-                                        <rect key="frame" x="87" y="215" width="78" height="30"/>
+                                        <rect key="frame" x="109" y="258" width="78" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.33146549759999999" green="0.68782911309999994" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Done">
@@ -677,12 +698,19 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbJ-Lx-zwa">
-                                        <rect key="frame" x="8" y="8" width="107" height="21"/>
+                                        <rect key="frame" x="20" y="37" width="107" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="PW0-h3-HAh">
+                                        <rect key="frame" x="20" y="66" width="256" height="171"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="537606125.46614003">
+                                            <!--2018-01-14 07:02:05 +0000-->
+                                        </date>
+                                    </datePicker>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
@@ -699,7 +727,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ldb-Hb-WkQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="iOT-FC-Jfy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2063" y="-101"/>
+            <point key="canvasLocation" x="2061.5999999999999" y="-101.19940029985008"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0g3-Su-ibS">
@@ -757,9 +785,10 @@
         <image name="Icons" width="30" height="28"/>
         <image name="arrowCollapse" width="30" height="30"/>
         <image name="defaultPhoto" width="4674" height="3336"/>
+        <image name="trash" width="35" height="35"/>
+        <image name="whiteArrow" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DlB-Rv-yel"/>
-        <segue reference="zuz-Dj-QE8"/>
+        <segue reference="2Iq-Lg-HMm"/>
     </inferredMetricsTieBreakers>
 </document>

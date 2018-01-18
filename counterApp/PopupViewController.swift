@@ -32,10 +32,5 @@ class PopupViewController: UIViewController {
         guard let button = sender as? UIBarButtonItem, button === doneBtn else {
             return
         }
-        print("*** PREPARING!!")
-        
-        //formatter.string(from: date)
-        
-        
     }
 }

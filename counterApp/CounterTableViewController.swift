@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import UserNotifications
+
 import os.log
 
 class CounterTableViewController: UITableViewController {
 
     var counters = [Counter]()
+    var isGrantedNotificationAccess:Bool = false
     
     let defaults = UserDefaults.standard
     
@@ -25,19 +28,25 @@ class CounterTableViewController: UITableViewController {
             }
             else {
                 saveCountdowns()
-                
                 // Add a new counter.
-                let newIndexPath = IndexPath(row: counters.count, section: 0)
-                
                 counters.append(counter)
+                // Sort countdown list
                 counters = sortCountdowns(counters)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-                tableView.beginUpdates()
-                tableView.endUpdates()
-                
+                tableView.reloadData()
             }
         }
     }
+    
+    @IBAction func deleteCell(_ sender: AnyObject?) {
+        let selectedCell = sender?.superview??.superview as! CounterTableViewCell
+        
+        guard let indexPath = tableView.indexPath(for: selectedCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        counters.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     
     private func saveCountdowns() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(counters, toFile: Counter.ArchiveURL.path)
@@ -51,21 +60,19 @@ class CounterTableViewController: UITableViewController {
     private func loadCountdowns() -> [Counter]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = self.counters[sourceIndexPath.row]
-        print("*** MOVING AT poS: ")
-        print(sourceIndexPath.row)
-        counters.remove(at: sourceIndexPath.row)
-        counters.insert(movedObject, at: destinationIndexPath.row)
-        os_log("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(counters)")
-        // To check for correctness enable: self.tableView.reloadData()
-    }
-    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UNUserNotificationCenter.current().requestAuthorization(
+                options: [.alert,.sound,.badge],
+                completionHandler: { (granted,error) in
+                    self.isGrantedNotificationAccess = granted
+            }
+        )
+        
+        defaults.set(self.isGrantedNotificationAccess, forKey: "notificationAccess")
+
         navigationController?.isNavigationBarHidden = false
         let savedCountdowns = loadCountdowns()
         if (savedCountdowns! != [])  {
@@ -87,7 +94,6 @@ class CounterTableViewController: UITableViewController {
     func sortCountdowns(_ countdowns: [Counter]) -> [Counter] {
         if (defaults.bool(forKey: "sortByDate"))
         {
-            print("**** SORTING By DATE!!!!")
             return countdowns.sorted(by: { $0.date < $1.date })
         }
         else {

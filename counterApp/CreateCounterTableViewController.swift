@@ -139,7 +139,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
                 return 250
             }
         }
-        return 50
+        return 45
     }
     
     /*
@@ -197,7 +197,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             let name = nameTextField.text ?? ""
             if (name == "")
             {
-                nameTextField.text = "Untitled Counter"
+                nameTextField.text = "Countdown to " + dateLbl.text!;
                 /*
                 let alertController = UIAlertController(title: "Cannot Save Counter", message: "Invalid counter name", preferredStyle: .alert)
                 let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
