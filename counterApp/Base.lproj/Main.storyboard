@@ -13,7 +13,7 @@
         <!--Countdowns-->
         <scene sceneID="aoz-TK-xRj">
             <objects>
-                <tableViewController id="UKO-YP-Rxc" customClass="CounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalTransitionStyle="crossDissolve" id="UKO-YP-Rxc" customClass="CounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LyQ-oe-1Uc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -184,7 +184,7 @@
                         <sections>
                             <tableViewSection id="m0q-wN-0Eg">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zz7-pT-6DX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="zz7-pT-6DX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zz7-pT-6DX" id="7do-KW-xhf">
@@ -217,7 +217,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="WUd-qR-JqV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="WUd-qR-JqV">
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WUd-qR-JqV" id="qNv-b9-Ur0">
@@ -250,7 +250,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="xr5-tp-1OU">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="l1u-V3-KGM">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="checkmark" id="l1u-V3-KGM">
                             <connections>
                                 <segue destination="J2d-xK-MB4" kind="unwind" unwindAction="unwindToCounterListWithSender:" id="U4F-rL-aAj"/>
                             </connections>
@@ -304,7 +304,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Countdown Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
+                                                <textField opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Countdown Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Wvj-Iv-zh7">
                                                     <rect key="frame" x="10" y="10" width="355" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -381,19 +381,23 @@
                                                     </connections>
                                                 </datePicker>
                                                 <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pYT-IN-72N">
-                                                    <rect key="frame" x="15" y="10" width="345" height="30"/>
+                                                    <rect key="frame" x="15" y="10" width="345" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="timeLbl" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6N8-tw-aYD">
-                                                            <rect key="frame" x="130.5" y="5" width="214.5" height="20.5"/>
+                                                            <rect key="frame" x="125.5" y="2.5" width="219.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="arrowCollapse" translatesAutoresizingMaskIntoConstraints="NO" id="INS-GA-8kF">
-                                                            <rect key="frame" x="95.5" y="0.0" width="30" height="30"/>
+                                                            <rect key="frame" x="95.5" y="0.0" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="FRm-Fa-iUb"/>
+                                                                <constraint firstAttribute="height" constant="25" id="Oqg-g4-EP1"/>
+                                                            </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Select Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEm-w2-vzd">
-                                                            <rect key="frame" x="0.0" y="5" width="90.5" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="2.5" width="90.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -525,7 +529,7 @@
                                                 <segue destination="SsF-Ph-zr0" kind="show" id="zuz-Dj-QE8"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FOL-4S-FsB">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" image="checkmark" id="FOL-4S-FsB">
                                             <connections>
                                                 <segue destination="dZZ-76-eZd" kind="unwind" unwindAction="unwindFromCalendarWithSender:" id="iEm-Yl-JuE"/>
                                             </connections>
@@ -851,6 +855,6 @@
         <image name="whiteArrow" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OPn-JU-nTg"/>
+        <segue reference="zuz-Dj-QE8"/>
     </inferredMetricsTieBreakers>
 </document>

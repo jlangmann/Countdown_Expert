@@ -18,6 +18,7 @@ class SettingsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     let sortByDateConstant = "sortByDate"
     let notificationAccess = "notificationAccess"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +27,7 @@ class SettingsTableViewController: UITableViewController {
         } else {
             sortByCreatedBtn.isSelected = true
         }
+        tableView.tableFooterView = UIView()
     }
 
     @IBAction func createdBtnClick(_ sender: UIButton) {

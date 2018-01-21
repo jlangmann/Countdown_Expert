@@ -29,9 +29,10 @@ class CounterTableViewController: UITableViewController {
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
-                saveCountdowns()
                 // Add a new counter.
                 counters.append(counter)
+                saveCountdowns()
+
                 // Sort countdown list
                 counters = sortCountdowns(counters)
                 tableView.reloadData()
@@ -79,6 +80,7 @@ class CounterTableViewController: UITableViewController {
                     fatalError("The selected cell is not being displayed by the table")
                 }
                 self.counters.remove(at: indexPath.row)
+                self.saveCountdowns()
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }))
                 
