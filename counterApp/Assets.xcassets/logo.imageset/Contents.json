@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "countdown_logox2-1.png",
+      "filename" : "countdown_logo_large.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "countdown_logox2.png",
+      "filename" : "countdown_logo_large-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "countdown_logox3.png",
+      "filename" : "countdown_logo_large-2.png",
       "scale" : "3x"
     }
   ],

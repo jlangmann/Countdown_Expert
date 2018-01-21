@@ -9,11 +9,14 @@
 import UIKit
 import os.log
 
-class CreateCounterTableViewController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateCounterTableViewController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    let pickerData = [["Anniversary", "Birthday", "Deadline", "Holiday", "Vacation"]]
     var timeCellExpanded: Bool = false
     let formatter = DateFormatter()
+    var showNames = false
     
+    @IBOutlet var namePicker: UIPickerView!
     @IBOutlet var caretImg: UIImageView!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
@@ -31,6 +34,43 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBAction func selectImage(_ sender: Any) {
         _chooseImage()
     }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData[component].count
+    }
+    
+    func pickerView(_
+        pickerView: UIPickerView,
+                    titleForRow row: Int,
+                    forComponent component: Int
+        ) -> String? {
+        return pickerData[component][row]
+    }
+    
+    func pickerView(_
+        pickerView: UIPickerView,
+        didSelectRow row: Int,
+        inComponent component: Int)
+    {
+        nameTextField.text = pickerData[component][row]
+    }
+
+    @IBAction func startEditing(_ sender: Any) {
+        self.showNames = true
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    @IBAction func stopEditing(_ sender: Any) {
+        self.showNames = false
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // The info dictionary may contain multiple representations of the image. You want to use the original.
@@ -83,6 +123,9 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
 
+        namePicker.delegate = self
+        namePicker.dataSource = self
+        
         nameTextField.delegate = self
         
         if let counter = counter {
@@ -153,6 +196,9 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         {
             return 25
         }
+        else if (indexPath.row == 0 && self.showNames) {
+            return 200
+        }
         return 50
     }
     
@@ -221,21 +267,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             }
         }
         return true
-    }
-    
-    @IBAction func deleteCell(_ sender: Any) {
-        let refreshAlert = UIAlertController(title: "Delete Countdown", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-            print("OJWefiojfoijeoiefji")
-            
-            //self.performSegue(withIdentifier: "unwindAndDelete", sender: self)
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-        }))
-        present(refreshAlert, animated: true, completion: nil)
-        
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

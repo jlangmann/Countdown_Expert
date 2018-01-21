@@ -10,10 +10,11 @@ import UIKit
 
 class LoadingScreenViewController: UIViewController {
 
+    @IBOutlet var createBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.layer.cornerRadius = 10
+        createBtn.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
     }
 
