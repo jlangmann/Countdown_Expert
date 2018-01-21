@@ -22,9 +22,11 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var timeLbl: UILabel!
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var editImgBtn: UIButton!
+
+    @IBOutlet var deleteBtn: UIButton!
     
     var counter: Counter?
-    var selectedDate:Date = Date()
+    var selectedDate: Date = Date()
     
     @IBAction func selectImage(_ sender: Any) {
         _chooseImage()
@@ -51,7 +53,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         formatter.dateFormat = "HH:mm:ss a"
         timeLbl.text = formatter.string(from: timePicker.date)
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -89,11 +91,19 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             photoImageView.image = counter.photo
             selectedDate = counter.date
             timePicker.date = counter.time
+            self.deleteBtn.isHidden = false
+        }
+        else
+        {
+            selectedDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
+            timePicker.date = selectedDate
+            self.deleteBtn.isHidden = true
         }
         timeLbl.text = formatter.string(from: timePicker.date)
         formatter.dateStyle = .long
         dateLbl.text = formatter.string(from:selectedDate)
         
+        tableView.tableFooterView = UIView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -110,10 +120,10 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if (indexPath.row == 1){
+        if (indexPath.row == 2){
             performSegue(withIdentifier: "selectDate", sender: nil)
         }
-        else if indexPath.row == 2
+        else if indexPath.row == 3
         {
             if timeCellExpanded{
                 timeCellExpanded = false
@@ -126,20 +136,24 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             tableView.beginUpdates()
             tableView.endUpdates()
         }
-        else if (indexPath.row == 3)
+        else if (indexPath.row == 5)
         {
             _chooseImage()
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 2
+        if indexPath.row == 3
         {
             if timeCellExpanded {
                 return 250
             }
         }
-        return 45
+        else if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 6)
+        {
+            return 25
+        }
+        return 50
     }
     
     /*
@@ -197,26 +211,45 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             let name = nameTextField.text ?? ""
             if (name == "")
             {
-                nameTextField.text = "Countdown to " + dateLbl.text!;
-                /*
-                let alertController = UIAlertController(title: "Cannot Save Counter", message: "Invalid counter name", preferredStyle: .alert)
+                //nameTextField.text = "Untitled Countdown to " + dateLbl.text!;
+                
+                let alertController = UIAlertController(title: "Cannot Save Counter", message: "Enter a counter name!", preferredStyle: .alert)
                 let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alertController.addAction(OKAction)
                 self.present(alertController, animated: true, completion: nil)
                 return false
-                */
             }
         }
         return true
     }
+    
+    @IBAction func deleteCell(_ sender: Any) {
+        let refreshAlert = UIAlertController(title: "Delete Countdown", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            print("OJWefiojfoijeoiefji")
+            
+            //self.performSegue(withIdentifier: "unwindAndDelete", sender: self)
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+        }))
+        present(refreshAlert, animated: true, completion: nil)
+        
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
+        
+        
         // Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
+        
+        
         let name = nameTextField.text ?? ""
         let photo1 = photoImageView.image
         counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date, createdAt: Date())

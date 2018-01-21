@@ -16,6 +16,8 @@ class CounterTableViewController: UITableViewController {
     var counters = [Counter]()
     var isGrantedNotificationAccess:Bool = false
     
+    var segueDeleteCell:Bool = false
+    
     let defaults = UserDefaults.standard
     
     @IBAction func unwindToCounterList(sender: UIStoryboardSegue) {
@@ -35,6 +37,11 @@ class CounterTableViewController: UITableViewController {
                 tableView.reloadData()
             }
         }
+    }
+    
+    @IBAction func unwindAndDelete(sender: UIStoryboardSegue)
+    {
+        self.segueDeleteCell = true
     }
     
     @IBAction func deleteCell(_ sender: AnyObject?) {
@@ -61,6 +68,27 @@ class CounterTableViewController: UITableViewController {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if self.segueDeleteCell {
+            self.segueDeleteCell = false
+            
+            let refreshAlert = UIAlertController(title: "Delete Countdown", message: "Are you sure you want to delete this countdown?", preferredStyle: UIAlertControllerStyle.alert)
+                
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                guard let indexPath = self.tableView.indexPathForSelectedRow else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                self.counters.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }))
+                
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                
+            }))
+            present(refreshAlert, animated: true, completion: nil)
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
