@@ -22,7 +22,8 @@ class CounterTableViewCell: UITableViewCell {
     var counterDate = Date()
     
     var sentNotification: Bool = false;
-    
+    var countdownTimer : Timer?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,7 +35,7 @@ class CounterTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func setupCounter(date: Date) {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "MMMM dd, yyyy h:mm a"
@@ -42,7 +43,34 @@ class CounterTableViewCell: UITableViewCell {
         formatter.pmSymbol = "PM"
         dateLbl.text = formatter.string(from: date)
         counterDate = date
-        Timer.scheduledTimer(timeInterval: 1.0, target: self,      selector: #selector(timerRunning), userInfo: nil, repeats: true)
+        countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,      selector: #selector(timerRunning), userInfo: nil, repeats: true)
+        
+        if (UserDefaults.standard.bool(forKey: "notificationAccess"))
+        {
+            let content = UNMutableNotificationContent()
+            content.title = NSString.localizedUserNotificationString(forKey: self.counterNameLbl.text!, arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "Countdown completed! " + dateLbl.text!,
+                                                                    arguments: nil)
+            
+            // Configure the trigger
+            var dateInfo = DateComponents()
+            let calendar = Calendar.current
+            dateInfo.year = calendar.component(.year, from: date)
+            dateInfo.day = calendar.component(.day, from: date)
+            dateInfo.hour = calendar.component(.hour, from: date)
+            dateInfo.minute = calendar.component(.minute, from: date)
+            dateInfo.second = calendar.component(.second, from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+            
+            // Create the request object.
+            let request = UNNotificationRequest(identifier: "countdown" + self.counterNameLbl.text!, content: content, trigger: trigger)
+            let center = UNUserNotificationCenter.current()
+            center.add(request) { (error : Error?) in
+                if let theError = error {
+                    print(theError.localizedDescription)
+                }
+            }
+        }
     }
     
     @objc func timerRunning() {
@@ -66,14 +94,22 @@ class CounterTableViewCell: UITableViewCell {
             }
             if (days != 0 || (hours != 0))
             {
-                countdown = countdown + "\(hours) Hours, "
+                countdown = countdown + "\(hours) Hours"
             }
-            if (days != 0 || hours != 0 || (minutes != 0))
+            if (days == 0 && (minutes != 0))
             {
-                countdown = countdown + "\(minutes) Minutes, "
+                if (countdown != "")
+                {
+                    countdown += ", "
+                }
+                countdown = countdown + "\(minutes) Minutes"
             }
-            if (days != 0  || hours != 0 || minutes != 0 || (seconds != 0))
+            if (days == 0 && hours == 0 && (seconds != 0))
             {
+                if (countdown != "")
+                {
+                    countdown += ", "
+                }
                 countdown = countdown + "\(seconds) Seconds"
             }
             countdownLbl!.text = countdown
@@ -89,32 +125,9 @@ class CounterTableViewCell: UITableViewCell {
             self.backgroundColor = getColorByHex(rgbHexValue: 0xfc3d39)
             countdownLbl.textColor = UIColor.white
             counterNameLbl.textColor = UIColor.white
-
-            if (!sentNotification && UserDefaults.standard.bool(forKey: "notificationAccess"))
-            {
-                sentNotification = true
-                //Set the content of the notification
-                let content = UNMutableNotificationContent()
-                content.title = counterNameLbl.text! + " Coundown Complete!"
-                content.subtitle = dateLbl.text!
-                content.body = counterNameLbl.text! + " is complete!"
-                
-                //Set the trigger of the notification -- here a timer.
-                let trigger = UNTimeIntervalNotificationTrigger(
-                    timeInterval: 1.0,
-                    repeats: false)
-                
-                //Set the request for the notification from the above
-                let request = UNNotificationRequest(
-                    identifier: "1.second.message",
-                    content: content,
-                    trigger: trigger
-                )
-
-                //Add the notification to the currnet notification center
-                UNUserNotificationCenter.current().add(
-                    request, withCompletionHandler: nil)
-            }
+            
+            countdownTimer?.invalidate()
+            countdownTimer = nil
         }
     }
     

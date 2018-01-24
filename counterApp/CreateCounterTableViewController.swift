@@ -197,7 +197,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             return 25
         }
         else if (indexPath.row == 0 && self.showNames) {
-            return 200
+            return 175
         }
         return 50
     }

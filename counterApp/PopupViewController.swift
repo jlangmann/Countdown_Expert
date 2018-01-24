@@ -13,10 +13,11 @@ class PopupViewController: UIViewController {
     @IBOutlet var doneBtn: UIButton!
     @IBOutlet var popupDatePicker: UIDatePicker!
     @IBOutlet var popupView: UIView!
+    @IBOutlet var mainView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        popupView.layer.cornerRadius = 10
+        mainView.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
     }
 

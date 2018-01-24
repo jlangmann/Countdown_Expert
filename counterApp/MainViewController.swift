@@ -18,13 +18,15 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Do any additional setup after loading the view.
         let savedCountdowns = loadCountdowns()
-        if (savedCountdowns! == [])
+        print("TEST")
+        print(savedCountdowns)
+        if (savedCountdowns != nil && savedCountdowns! != [])
         {
-            loadMainView()
+            loadCounterView()
         }
         else
         {
-            loadCounterView()
+            loadMainView()
         }
     }
     

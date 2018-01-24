@@ -11,10 +11,9 @@ import UserNotifications
 
 import os.log
 
-class CounterTableViewController: UITableViewController {
+class CounterTableViewController: UITableViewController, UNUserNotificationCenterDelegate {
 
     var counters = [Counter]()
-    var isGrantedNotificationAccess:Bool = false
     
     var segueDeleteCell:Bool = false
     
@@ -94,22 +93,20 @@ class CounterTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert,.sound,.badge],
                 completionHandler: { (granted,error) in
-                    self.isGrantedNotificationAccess = granted
+                    self.defaults.set(granted, forKey: "notificationAccess")
             }
         )
         
-        defaults.set(self.isGrantedNotificationAccess, forKey: "notificationAccess")
-
         navigationController?.isNavigationBarHidden = false
         let savedCountdowns = loadCountdowns()
-        if (savedCountdowns! != [])  {
+        if (savedCountdowns != nil && savedCountdowns! != [])  {
             counters += savedCountdowns!
         }
-        
-        print("Calling view did load")
+
         counters = sortCountdowns(counters)
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -243,7 +240,7 @@ class CounterTableViewController: UITableViewController {
                 viewController.counter = selCounter
             
             case "ShowSettings":
-                print("Show settings")
+                os_log("Showing settings", log: OSLog.default, type: .debug)
 
             default:
                 print("Unexpected Segue Identifier; \(segue.identifier ?? "")")
