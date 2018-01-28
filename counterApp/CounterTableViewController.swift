@@ -45,7 +45,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     }
     
     @IBAction func deleteCell(_ sender: AnyObject?) {
-        let selectedCell = sender?.superview??.superview as! CounterTableViewCell
+        let selectedCell = sender?.superview??.superview?.superview?.superview?.superview as! CounterTableViewCell
         
         guard let indexPath = tableView.indexPath(for: selectedCell) else {
             fatalError("The selected cell is not being displayed by the table")
@@ -152,6 +152,30 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
+        if (indexPath.row % 5) == 0
+        {
+            cell.hexColor = 0x2d0a68
+        }
+        else if (indexPath.row % 4) == 0
+        {
+            cell.hexColor = 0xd42b88
+        }
+        else if (indexPath.row % 3 == 0)
+        {
+            cell.hexColor = 0xf35552
+        }
+        else if (indexPath.row % 2 == 0)
+        {
+            cell.hexColor = 0xfd9139
+        }
+        else if (indexPath.row % 1 == 0)
+        {
+            cell.hexColor = 0xfff3b5
+        }
+        else
+        {
+            cell.hexColor = 0xffffff
+        }
         
         // Get combined date from date and tim
         let combinedDate = combineDateWithTime(date: counter.date, time: counter.time)
