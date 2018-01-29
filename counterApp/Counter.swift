@@ -19,6 +19,7 @@ class Counter: NSObject, NSCoding {
         static let date = "date"
         static let time = "time"
         static let createdAt = "createdAt"
+        static let bgColor = "backgroundColor"
     }
     
     // Archive properties
@@ -30,6 +31,7 @@ class Counter: NSObject, NSCoding {
     var date: Date
     var time: Date
     var createdAt: Date
+    var bgColor: UIColor
 
     // NSCoding
     func encode(with aCoder: NSCoder) {
@@ -38,6 +40,7 @@ class Counter: NSObject, NSCoding {
         aCoder.encode(date, forKey: PropertyKey.date)
         aCoder.encode(time, forKey: PropertyKey.time)
         aCoder.encode(createdAt, forKey: PropertyKey.createdAt)
+        aCoder.encode(bgColor, forKey: PropertyKey.bgColor)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -48,25 +51,31 @@ class Counter: NSObject, NSCoding {
         }
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         let date = aDecoder.decodeObject(forKey: PropertyKey.date) as? Date
+        let time = aDecoder.decodeObject(forKey: PropertyKey.time) as? Date
         var createdAt = aDecoder.decodeObject(forKey: PropertyKey.createdAt) as? Date
+        var bgColor = aDecoder.decodeObject(forKey: PropertyKey.bgColor) as? UIColor
         // Must call designated initializer.
         if (createdAt == nil)
         {
             createdAt = Date()
         }
-        self.init(name: name, photo: photo!, date: date!, time: date!, createdAt:createdAt!)
+        if (bgColor == nil)
+        {
+            bgColor = UIColor.white
+        }
+        self.init(name: name, photo: photo!, date: date!, time: time!, createdAt:createdAt!, bgColor:bgColor!)
     }
     
-    init?(name: String, photo: UIImage?, date: Date, time: Date, createdAt: Date) {
+    init?(name: String, photo: UIImage?, date: Date, time: Date, createdAt: Date, bgColor: UIColor) {
         
         if name.isEmpty {
             return nil
         }
-        
         self.name = name
         self.photo = photo
         self.date = date
         self.time = time
         self.createdAt = createdAt
+        self.bgColor = bgColor
     }
 }

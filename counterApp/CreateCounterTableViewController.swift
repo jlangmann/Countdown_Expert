@@ -11,7 +11,7 @@ import os.log
 
 class CreateCounterTableViewController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    let pickerData = [["Anniversary", "Birthday", "Deadline", "Holiday", "Vacation"]]
+    let pickerData = [["Anniversary", "Birthday", "Deadline", "Event", "Holiday", "Vacation"]]
     var timeCellExpanded: Bool = false
     let formatter = DateFormatter()
     var showNames = false
@@ -26,6 +26,9 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var editImgBtn: UIButton!
 
+    @IBOutlet var bgCell: UITableViewCell!
+    
+    @IBOutlet var bgCellView: UIView!
     @IBOutlet var deleteBtn: UIButton!
     
     var counter: Counter?
@@ -90,7 +93,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     }
 
     @IBAction func timePicked(_ sender: Any) {
-        formatter.dateFormat = "HH:mm:ss a"
+        formatter.dateFormat = "h:mm a"
         timeLbl.text = formatter.string(from: timePicker.date)
     }
     
@@ -119,13 +122,12 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        formatter.dateFormat = "h:mm:ss a"
+        formatter.dateFormat = "h:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
 
         namePicker.delegate = self
         namePicker.dataSource = self
-        
         nameTextField.delegate = self
         
         if let counter = counter {
@@ -135,23 +137,21 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             selectedDate = counter.date
             timePicker.date = counter.time
             self.deleteBtn.isHidden = false
+            self.bgCell.backgroundColor = counter.bgColor
+            self.bgCell.backgroundColor?.setFill()
         }
         else
         {
             selectedDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
             timePicker.date = selectedDate
             self.deleteBtn.isHidden = true
+            self.bgCell.backgroundColor = UIColor.white
         }
         timeLbl.text = formatter.string(from: timePicker.date)
         formatter.dateStyle = .long
         dateLbl.text = formatter.string(from:selectedDate)
         
         tableView.tableFooterView = UIView()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -192,60 +192,16 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
                 return 250
             }
         }
-        else if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 6)
+        else if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 7)
         {
             return 25
         }
         else if (indexPath.row == 0 && self.showNames) {
-            return 175
+            return 160
         }
+        
         return 50
     }
-    
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 
@@ -276,14 +232,12 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         
         // Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
-        
-        
+
         let name = nameTextField.text ?? ""
         let photo1 = photoImageView.image
-        counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date, createdAt: Date())
+        counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date, createdAt: Date(), bgColor: bgCell.backgroundColor!)
     }
 
     @IBAction func unwindFromCalendar(sender: UIStoryboardSegue) {
@@ -293,4 +247,13 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             dateLbl.text = formatter.string(from:selectedDate)
         }
     }
+    
+    @IBAction func unwindFromBackgroundColor(sender: UIStoryboardSegue) {
+        if let backgroundController = sender.source as? BackgroundViewController {
+            let selColor = backgroundController.selColor
+            counter?.bgColor = selColor
+            bgCell.backgroundColor = selColor
+        }
+    }
+
 }

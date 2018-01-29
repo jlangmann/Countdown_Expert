@@ -25,17 +25,15 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing counter.
                 counters[selectedIndexPath.row] = counter
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else {
                 // Add a new counter.
                 counters.append(counter)
-                saveCountdowns()
-
-                // Sort countdown list
-                counters = sortCountdowns(counters)
-                tableView.reloadData()
             }
+            saveCountdowns()
+            // Sort countdown list
+            counters = sortCountdowns(counters)
+            tableView.reloadData()
         }
     }
     
@@ -92,8 +90,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert,.sound,.badge],
                 completionHandler: { (granted,error) in
@@ -152,29 +149,40 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
-        if (indexPath.row % 5) == 0
+        
+        if !counter.bgColor.isEqual(UIColor.white)
         {
-            cell.hexColor = 0x2d0a68
+            cell.hexColor = counter.bgColor
         }
-        else if (indexPath.row % 4) == 0
+        else if (indexPath.row >= 5 && indexPath.row % 5 == 0)
         {
-            cell.hexColor = 0xd42b88
+            // light purple
+            cell.hexColor = getColorByHex(rgbHexValue: 0x8468e4)
         }
-        else if (indexPath.row % 3 == 0)
+        else if (indexPath.row >= 4 && indexPath.row % 4 == 0)
         {
-            cell.hexColor = 0xf35552
+            // yellow
+            cell.hexColor = getColorByHex(rgbHexValue: 0xffce22)
         }
-        else if (indexPath.row % 2 == 0)
+        else if (indexPath.row >= 3 && indexPath.row % 3 == 0)
         {
-            cell.hexColor = 0xfd9139
+            // Orange
+            cell.hexColor = getColorByHex(rgbHexValue: 0xfd9139)
         }
-        else if (indexPath.row % 1 == 0)
+        else if (indexPath.row >= 2 && indexPath.row % 2 == 0)
         {
-            cell.hexColor = 0xfff3b5
+            // Red
+            cell.hexColor = getColorByHex(rgbHexValue: 0xf35552)
+        }
+        else if (indexPath.row >= 1 && indexPath.row % 1 == 0)
+        {
+            // Magenta
+            cell.hexColor = getColorByHex(rgbHexValue: 0xd42b88)
         }
         else
         {
-            cell.hexColor = 0xffffff
+            // Dark purple
+            cell.hexColor = getColorByHex(rgbHexValue: 0x2d0a68)
         }
         
         // Get combined date from date and tim
@@ -183,6 +191,14 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         return cell
     }
 
+    func getColorByHex(rgbHexValue:UInt32, alpha:Double = 1.0) -> UIColor {
+        let red = Double((rgbHexValue & 0xFF0000) >> 16) / 256.0
+        let green = Double((rgbHexValue & 0xFF00) >> 8) / 256.0
+        let blue = Double((rgbHexValue & 0xFF)) / 256.0
+        
+        return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
+    }
+    
     func combineDateWithTime(date: Date, time: Date) -> Date? {
         let calendar = NSCalendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
@@ -217,21 +233,6 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         }    
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
 
     
@@ -261,6 +262,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
                 }
                 
                 let selCounter = counters[indexPath.row]
+                selCounter.bgColor = selectedCell.hexColor
                 viewController.counter = selCounter
             
             case "ShowSettings":

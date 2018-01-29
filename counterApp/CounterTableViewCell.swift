@@ -21,7 +21,7 @@ class CounterTableViewCell: UITableViewCell {
     
     var counterDate = Date()
     
-    var hexColor:UInt32 = 0xffffff
+    var hexColor:UIColor = UIColor.white
     
     var sentNotification: Bool = false;
     var countdownTimer : Timer?
@@ -38,19 +38,28 @@ class CounterTableViewCell: UITableViewCell {
         deleteBtn.isHidden = true
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     func setupNotification(date: Date, key:String)
     {
         if (UserDefaults.standard.bool(forKey: key))
         {
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: self.counterNameLbl.text!, arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: "Countdown completed! " + dateLbl.text!,
+            
+            var message = "Countdown completed! " + dateLbl.text!
+            if key == notifyOneWeek
+            {
+                message = "Countdown will be completed in 1 week: " + dateLbl.text!
+            }
+            else if key == notifyOneDay
+            {
+                message = "Countdown will be completed in 1 day: " + dateLbl.text!
+            }
+            else if key == notifyOneHour
+            {
+                message = "Countdown will be completed in 1 hour: " + dateLbl.text!
+            }
+
+            content.body = NSString.localizedUserNotificationString(forKey: message,
                                                                     arguments: nil)
          
             let calAdjust = Calendar.autoupdatingCurrent
@@ -69,6 +78,8 @@ class CounterTableViewCell: UITableViewCell {
             }
             
             print("*** Countdowning to date: " + countdownDate.description)
+            
+            print("** NOW: " + Date().description)
 
             // Configure the trigger
             var dateInfo = DateComponents()
@@ -92,7 +103,6 @@ class CounterTableViewCell: UITableViewCell {
     }
 
     func setupCounter(date: Date) {
-        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "MMMM dd, yyyy h:mm a"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
@@ -102,10 +112,18 @@ class CounterTableViewCell: UITableViewCell {
         
         if (UserDefaults.standard.bool(forKey: notificationAccess))
         {
-            setupNotification(date:date, key:notificationAccess)
-            setupNotification(date:date, key:notifyOneWeek)
-            setupNotification(date:date, key:notifyOneDay)
-            setupNotification(date:date, key:notifyOneHour)
+            let now:Date = Date()
+            if now < date
+            {
+                setupNotification(date:date, key:notificationAccess)
+                setupNotification(date:date, key:notifyOneWeek)
+                setupNotification(date:date, key:notifyOneDay)
+                setupNotification(date:date, key:notifyOneHour)
+            }
+            else
+            {
+                print("**** SKIPPINGGGGGG")
+            }
         }
     }
     
@@ -126,11 +144,28 @@ class CounterTableViewCell: UITableViewCell {
             var countdown = ""
             if (days != 0)
             {
-                countdown = "\(days) Days, "
+                if days == 1
+                {
+                    countdown = "\(days) Day"
+                }
+                else {
+                    countdown = "\(days) Days"
+                }
             }
             if (hours != 0)
             {
-                countdown = countdown + "\(hours) Hours"
+                if (countdown != "")
+                {
+                    countdown += ", "
+                }
+                if hours == 1
+                {
+                    countdown = countdown + "\(hours) Hour"
+                }
+                else
+                {
+                    countdown = countdown + "\(hours) Hours"
+                }
             }
             if ((days == 0 || hours == 0) && (minutes != 0))
             {
@@ -138,7 +173,13 @@ class CounterTableViewCell: UITableViewCell {
                 {
                     countdown += ", "
                 }
-                countdown = countdown + "\(minutes) Minutes"
+                if minutes == 1
+                {
+                    countdown = countdown + "\(minutes) Minute"
+                }
+                else {
+                    countdown = countdown + "\(minutes) Minutes"
+                }
             }
             if (days == 0 && hours == 0 && (seconds != 0))
             {
@@ -146,10 +187,17 @@ class CounterTableViewCell: UITableViewCell {
                 {
                     countdown += ", "
                 }
-                countdown = countdown + "\(seconds) Seconds"
+                if seconds == 1
+                {
+                    countdown = countdown + "\(seconds) Second"
+                }
+                else
+                {
+                    countdown = countdown + "\(seconds) Seconds"
+                }
             }
             countdownLbl!.text = countdown
-            self.backgroundColor = getColorByHex(rgbHexValue: hexColor)
+            self.backgroundColor = hexColor
             countdownLbl.textColor = UIColor.white
             counterNameLbl.textColor = UIColor.white
             deleteBtn.isHidden = true
@@ -158,8 +206,7 @@ class CounterTableViewCell: UITableViewCell {
         
             deleteBtn.isHidden = false
             countdownLbl!.text = String(0)
-            self.backgroundColor = getColorByHex(rgbHexValue: 0x000000)
-            //self.backgroundColor = getColorByHex(rgbHexValue: 0xfc3d39)
+            self.backgroundColor = UIColor.black
             countdownLbl.textColor = UIColor.white
             counterNameLbl.textColor = UIColor.white
             
