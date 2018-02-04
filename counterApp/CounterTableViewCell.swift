@@ -17,7 +17,6 @@ class CounterTableViewCell: UITableViewCell {
     @IBOutlet var countdownLbl: UILabel!
     @IBOutlet var img: UIImageView!
     @IBOutlet var dateLbl: UILabel!
-    @IBOutlet var deleteBtn: UIButton!
     
     var counterDate = Date()
     
@@ -35,7 +34,6 @@ class CounterTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        deleteBtn.isHidden = true
     }
 
     func setupNotification(date: Date, key:String)
@@ -43,6 +41,7 @@ class CounterTableViewCell: UITableViewCell {
         if (UserDefaults.standard.bool(forKey: key))
         {
             let content = UNMutableNotificationContent()
+            content.sound = UNNotificationSound.default()
             content.title = NSString.localizedUserNotificationString(forKey: self.counterNameLbl.text!, arguments: nil)
             
             var message = "Countdown completed! " + dateLbl.text!
@@ -76,23 +75,20 @@ class CounterTableViewCell: UITableViewCell {
             {
                 countdownDate = calAdjust.date(byAdding:.hour, value: -1, to:date)!
             }
-            
-            print("*** Countdowning to date: " + countdownDate.description)
-            
-            print("** NOW: " + Date().description)
 
             // Configure the trigger
             var dateInfo = DateComponents()
             let calendar = Calendar.current
-            dateInfo.year = calendar.component(.year, from: date)
-            dateInfo.day = calendar.component(.day, from: date)
-            dateInfo.hour = calendar.component(.hour, from: date)
-            dateInfo.minute = calendar.component(.minute, from: date)
-            dateInfo.second = calendar.component(.second, from: date)
+            dateInfo.year = calendar.component(.year, from: countdownDate)
+            dateInfo.day = calendar.component(.day, from: countdownDate)
+            dateInfo.hour = calendar.component(.hour, from: countdownDate)
+            dateInfo.minute = calendar.component(.minute, from: countdownDate)
+            dateInfo.second = calendar.component(.second, from: countdownDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
             
             // Create the request object.
-            let request = UNNotificationRequest(identifier: "countdown" + self.counterNameLbl.text!, content: content, trigger: trigger)
+            let identifier = self.counterNameLbl.text! + date.description + key
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             let center = UNUserNotificationCenter.current()
             center.add(request) { (error : Error?) in
                 if let theError = error {
@@ -119,10 +115,6 @@ class CounterTableViewCell: UITableViewCell {
                 setupNotification(date:date, key:notifyOneWeek)
                 setupNotification(date:date, key:notifyOneDay)
                 setupNotification(date:date, key:notifyOneHour)
-            }
-            else
-            {
-                print("**** SKIPPINGGGGGG")
             }
         }
     }
@@ -200,11 +192,8 @@ class CounterTableViewCell: UITableViewCell {
             self.backgroundColor = hexColor
             countdownLbl.textColor = UIColor.white
             counterNameLbl.textColor = UIColor.white
-            deleteBtn.isHidden = true
         }
         else {
-        
-            deleteBtn.isHidden = false
             countdownLbl!.text = String(0)
             self.backgroundColor = UIColor.black
             countdownLbl.textColor = UIColor.white

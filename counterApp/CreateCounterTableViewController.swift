@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import UserNotifications
 
 class CreateCounterTableViewController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -25,7 +26,8 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var timeLbl: UILabel!
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var editImgBtn: UIButton!
-
+    @IBOutlet var timeDone: UIButton!
+    
     @IBOutlet var bgCell: UITableViewCell!
     
     @IBOutlet var bgCellView: UIView!
@@ -73,7 +75,16 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         tableView.beginUpdates()
         tableView.endUpdates()
     }
-    
+ 
+    @IBAction func timeDoneClose(_ sender: Any) {
+        // time close and done
+        timeCellExpanded = false
+        caretImg.image = UIImage(named: "arrowCollapse")
+        let indexPath = IndexPath(row: 3, section: 0)
+        self.tableView.deselectRow(at: indexPath, animated: false)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // The info dictionary may contain multiple representations of the image. You want to use the original.
@@ -139,12 +150,14 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             self.deleteBtn.isHidden = false
             self.bgCell.backgroundColor = counter.bgColor
             self.bgCell.backgroundColor?.setFill()
+            self.bgCell.isHidden = false
         }
         else
         {
             selectedDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
             timePicker.date = selectedDate
             self.deleteBtn.isHidden = true
+            self.bgCell.isHidden = true
             self.bgCell.backgroundColor = UIColor.white
         }
         timeLbl.text = formatter.string(from: timePicker.date)
@@ -207,10 +220,12 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
+        /*
         let button = sender as? UIBarButtonItem
         if (button != nil && button == saveButton)
         {
             let name = nameTextField.text ?? ""
+            
             if (name == "")
             {
                 //nameTextField.text = "Untitled Countdown to " + dateLbl.text!;
@@ -221,23 +236,50 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
                 self.present(alertController, animated: true, completion: nil)
                 return false
             }
+ 
         }
+         */
         return true
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
-        
         // Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {
             return
         }
-
-        let name = nameTextField.text ?? ""
+        var name = nameTextField.text
         let photo1 = photoImageView.image
-        counter = Counter(name: name, photo: photo1, date: selectedDate, time: timePicker.date, createdAt: Date(), bgColor: bgCell.backgroundColor!)
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: timePicker.date)
+        let timeDate = calendar.date(from: components)!
+        if let counter = counter {
+            if (name != counter.name || selectedDate != counter.date)
+            {
+                // Remove the notifier
+                let identifier = counter.name + counter.date.description
+                var idList = [String]()
+                for key in ["notificationAccess", "notifyOneWeek", "notifyOneDay", "notifyOneHour"]
+                {
+                    idList.append(identifier + key)
+                }
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: idList)
+            }
+            counter.name = name!
+            counter.photo = photo1
+            counter.date = selectedDate
+            counter.time = timeDate
+            counter.bgColor = bgCell.backgroundColor!
+        }
+        else {
+            if name == ""
+            {
+                name = "Untitled"
+            }
+            counter = Counter(name: name!, photo: photo1, date: selectedDate, time: timeDate, createdAt: Date(), bgColor: bgCell.backgroundColor!)
+        }
     }
 
     @IBAction func unwindFromCalendar(sender: UIStoryboardSegue) {

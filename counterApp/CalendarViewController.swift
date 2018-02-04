@@ -37,7 +37,6 @@ class CalendarViewController: UIViewController {
         setupCalendarView()
     }
 
-    
     @IBAction func todayBtnClicked(_ sender: Any) {
         calendarView.deselectAllDates()
         calendarView.scrollToDate(Date(), animateScroll: false)
@@ -86,10 +85,6 @@ class CalendarViewController: UIViewController {
         {
             selectedDate = calendarView.selectedDates[0]
         }
-        
-        //formatter.string(from: date)
-        
-        
     }
     
     @IBAction func unwindFromPopup(sender: UIStoryboardSegue) {
@@ -100,9 +95,7 @@ class CalendarViewController: UIViewController {
             calendarView.selectDates([selDate])
         }
     }
-
 }
-
 
 extension CalendarViewController: JTAppleCalendarViewDataSource {
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {

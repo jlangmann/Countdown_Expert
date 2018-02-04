@@ -17,6 +17,8 @@ class MainViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         // Do any additional setup after loading the view.
+        loadCounterView()
+        /*
         let savedCountdowns = loadCountdowns()
         if (savedCountdowns != nil && savedCountdowns! != [])
         {
@@ -26,6 +28,7 @@ class MainViewController: UIViewController {
         {
             loadMainView()
         }
+        */
     }
     
     private func loadMainView()

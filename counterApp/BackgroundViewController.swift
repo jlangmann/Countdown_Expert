@@ -11,8 +11,8 @@ import UIKit
 class BackgroundViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
-    var items = [0x2d0a68, 0x8468e4, 0xd42b88, 0xf35552, 0xfd9139, 0xffce22]
-
+    var items = [0x2d0a68, 0x59027c, 0xa11da0, 0xde3276, 0xf35752, 0xf7823b, 0xffa85a,0xffc468,0xffec9b]
+    
     @IBOutlet var tableView: UICollectionView!
     var selColor:UIColor = UIColor.white
     

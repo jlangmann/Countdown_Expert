@@ -27,11 +27,46 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
                 counters[selectedIndexPath.row] = counter
             }
             else {
+                
+                // Set counter bg color here
+                let nextIndex = counters.count % 6
+                if (nextIndex == 0)
+                {
+                    counter.bgColor = getColorByHex(rgbHexValue: 0x2d0a68)
+                }
+                else if nextIndex == 1
+                {
+                    counter.bgColor = getColorByHex(rgbHexValue: 0x8468e4)
+                }
+                else if nextIndex == 2
+                {
+                    counter.bgColor = getColorByHex(rgbHexValue: 0xd42b88)
+                }
+                else if nextIndex == 3
+                {
+                   counter.bgColor = getColorByHex(rgbHexValue: 0xf35552)
+                }
+                else if nextIndex == 4
+                {
+                    counter.bgColor = getColorByHex(rgbHexValue: 0xfd9139)
+                }
+                else
+                {
+                    counter.bgColor = getColorByHex(rgbHexValue: 0xffce22)
+                }
+                
                 // Add a new counter.
                 counters.append(counter)
             }
+            
+            // Remove previous notifications
+            
             saveCountdowns()
             // Sort countdown list
+            counters = sortCountdowns(counters)
+            tableView.reloadData()
+        }
+        if ((sender.source as? SettingsTableViewController) != nil) {
             counters = sortCountdowns(counters)
             tableView.reloadData()
         }
@@ -41,17 +76,6 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     {
         self.segueDeleteCell = true
     }
-    
-    @IBAction func deleteCell(_ sender: AnyObject?) {
-        let selectedCell = sender?.superview??.superview?.superview?.superview?.superview as! CounterTableViewCell
-        
-        guard let indexPath = tableView.indexPath(for: selectedCell) else {
-            fatalError("The selected cell is not being displayed by the table")
-        }
-        counters.remove(at: indexPath.row)
-        self.tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
-    
     
     private func saveCountdowns() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(counters, toFile: Counter.ArchiveURL.path)
@@ -66,6 +90,28 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
     }
     
+    private func deleteCountdown(indexPath: IndexPath)
+    {
+        let index = indexPath.row
+        let delCounter = self.counters[index]
+
+        self.removeNotifier(counter: delCounter)
+        self.counters.remove(at: index)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        self.saveCountdowns()
+    }
+    
+    private func removeNotifier(counter:Counter)
+    {
+        let identifier = counter.name + counter.date.description
+        var idList = [String]()
+        for key in ["notificationAccess", "notifyOneWeek", "notifyOneDay", "notifyOneHour"]
+        {
+            idList.append(identifier + key)
+        }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: idList)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if self.segueDeleteCell {
             self.segueDeleteCell = false
@@ -76,12 +122,15 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
                 guard let indexPath = self.tableView.indexPathForSelectedRow else {
                     fatalError("The selected cell is not being displayed by the table")
                 }
-                self.counters.remove(at: indexPath.row)
-                self.saveCountdowns()
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.deleteCountdown(indexPath: indexPath)
             }))
                 
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                guard let indexPath = self.tableView.indexPathForSelectedRow else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                self.tableView.deselectRow(at: indexPath, animated: false)
+                return
                 
             }))
             present(refreshAlert, animated: true, completion: nil)
@@ -91,6 +140,10 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.backgroundView = UIImageView(image: UIImage(named: "logo.png"))
+        tableView.backgroundView?.contentMode = .scaleAspectFit
+        tableView.backgroundView?.alpha = 0.5
+        
         UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert,.sound,.badge],
                 completionHandler: { (granted,error) in
@@ -149,42 +202,8 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         
         cell.counterNameLbl.text = counter.name
         cell.img.image = counter.photo
-        
-        if !counter.bgColor.isEqual(UIColor.white)
-        {
-            cell.hexColor = counter.bgColor
-        }
-        else if (indexPath.row >= 5 && indexPath.row % 5 == 0)
-        {
-            // light purple
-            cell.hexColor = getColorByHex(rgbHexValue: 0x8468e4)
-        }
-        else if (indexPath.row >= 4 && indexPath.row % 4 == 0)
-        {
-            // yellow
-            cell.hexColor = getColorByHex(rgbHexValue: 0xffce22)
-        }
-        else if (indexPath.row >= 3 && indexPath.row % 3 == 0)
-        {
-            // Orange
-            cell.hexColor = getColorByHex(rgbHexValue: 0xfd9139)
-        }
-        else if (indexPath.row >= 2 && indexPath.row % 2 == 0)
-        {
-            // Red
-            cell.hexColor = getColorByHex(rgbHexValue: 0xf35552)
-        }
-        else if (indexPath.row >= 1 && indexPath.row % 1 == 0)
-        {
-            // Magenta
-            cell.hexColor = getColorByHex(rgbHexValue: 0xd42b88)
-        }
-        else
-        {
-            // Dark purple
-            cell.hexColor = getColorByHex(rgbHexValue: 0x2d0a68)
-        }
-        
+        cell.hexColor = counter.bgColor
+
         // Get combined date from date and tim
         let combinedDate = combineDateWithTime(date: counter.date, time: counter.time)
         cell.setupCounter(date: combinedDate!)
@@ -225,9 +244,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            counters.remove(at: indexPath.row)
-            saveCountdowns()
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.deleteCountdown(indexPath: indexPath)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
