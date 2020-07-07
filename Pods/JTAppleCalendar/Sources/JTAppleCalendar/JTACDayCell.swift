@@ -1,7 +1,7 @@
 //
-//  JTAppleCell.swift
+//  JTACDayCell.swift
 //
-//  Copyright (c) 2016-2017 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
+//  Copyright (c) 2016-2020 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,19 @@
 //  THE SOFTWARE.
 //
 
-/// The JTAppleCell class defines the attributes and
-/// behavior of the cells that appear in JTAppleCalendarView objects.
-open class JTAppleCell: UICollectionViewCell {
-        
+import UIKit
+
+/// The JTAppleDayCell class defines the attributes and
+/// behavior of the cells that appear in JTAppleCalendarMonthView objects.
+@available(*, unavailable, renamed: "JTACDayCell")
+open class JTAppleCell: UICollectionViewCell{}
+open class JTACDayCell: UICollectionViewCell {
+    @available(*, message: "Using isSelected only to determing when selection occurs is ok. For other cases please use cellState.isSelected to avoid synchronization issues.")
+    open override var isSelected: Bool {
+        get { return super.isSelected }
+        set { super.isSelected = newValue}
+    }
+    
     /// Cell view that will be customized
 	public override init(frame: CGRect) {
 		super.init(frame: frame)

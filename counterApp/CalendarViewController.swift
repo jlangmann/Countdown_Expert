@@ -18,7 +18,7 @@ class CalendarViewController: UIViewController {
     
     
     @IBOutlet var todayBtn: UIButton!
-    @IBOutlet var calendarView: JTAppleCalendarView!
+    @IBOutlet var calendarView: JTACMonthView!
     @IBOutlet var year: UILabel!
     @IBOutlet var month: UILabel!
     @IBOutlet var expandBtn: UIButton!
@@ -97,12 +97,12 @@ class CalendarViewController: UIViewController {
     }
 }
 
-extension CalendarViewController: JTAppleCalendarViewDataSource {
-    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+extension CalendarViewController: JTACMonthViewDataSource {
+    func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
 
     }
     
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+    func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
         
         formatter.dateFormat = "yyyy MM dd"
         //formatter.timeZone = calendar.currentSection().timeZone
@@ -134,8 +134,8 @@ func setCellSelected(cell: CustomCell, cellState: CellState)
 
 
 
-extension CalendarViewController: JTAppleCalendarViewDelegate {
-    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+extension CalendarViewController: JTACMonthViewDelegate {
+    func calendar(_ calendar: JTACMonthView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTACDayCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         cell.dateLabel.text = cellState.text
         
@@ -143,20 +143,20 @@ extension CalendarViewController: JTAppleCalendarViewDelegate {
         return cell
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+    func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState) {
         guard let validCell = cell as? CustomCell else {return}
         
         setCellSelected(cell: validCell, cellState: cellState)
         formatter.dateFormat = "MM DD YYYY"
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+    func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState) {
         guard let validCell = cell as? CustomCell else {return}
         
         setCellSelected(cell: validCell, cellState: cellState)
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+    func calendar(_ calendar: JTACMonthView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         setupViews(from: visibleDates)
         
     }

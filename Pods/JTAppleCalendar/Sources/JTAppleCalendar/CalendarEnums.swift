@@ -1,7 +1,7 @@
 //
 //  CalendarEnums.swift
 //
-//  Copyright (c) 2016-2017 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
+//  Copyright (c) 2016-2020 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+
+import UIKit
 
 /// Describes a scroll destination
 public enum SegmentDestination {
@@ -45,7 +47,7 @@ public enum OutDateCellGeneration {
 public enum InDateCellGeneration {
     /// forFirstMonthOnly will generate dates for the first month only
     /// forAllMonths will generate dates for all months
-    /// off setting wilil generate no dates
+    /// off setting will generate no dates
     case forFirstMonthOnly, forAllMonths, off
 }
 
@@ -114,6 +116,11 @@ public enum MonthsOfYear: Int {
 public enum SelectionRangePosition: Int {
     /// Selection position
     case left = 1, middle, right, full, none
+}
+
+/// Between month segments, the range selection can either be visually disconnected or connected
+public enum RangeSelectionMode {
+  case segmented, continuous
 }
 
 /// Signifies whether or not a selection was done programatically or by the user

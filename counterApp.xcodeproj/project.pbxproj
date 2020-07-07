@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		12E1796F4DB190BD0A570052 /* Pods_counterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE91F4B210BA6F74503184 /* Pods_counterApp.framework */; };
 		E32A513320141ABA00E77B56 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32A513220141ABA00E77B56 /* LoadingScreenViewController.swift */; };
+		E358ACF424B44193001A36C7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E358ACF324B44193001A36C7 /* SwiftPackageProductDependency */; };
 		E3591FDA200191680033F466 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3591FD9200191680033F466 /* MainViewController.swift */; };
 		E370B4731FD52DEB00F6F986 /* CreateCounterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370B4721FD52DEB00F6F986 /* CreateCounterTableViewController.swift */; };
 		E3712EBC1FCE80E900EDFE16 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3712EBB1FCE80E900EDFE16 /* CustomCell.swift */; };
@@ -56,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12E1796F4DB190BD0A570052 /* Pods_counterApp.framework in Frameworks */,
+				E358ACF424B44193001A36C7 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,14 +135,16 @@
 				E3BF7E7B1FC3EB0A00B75C43 /* Sources */,
 				E3BF7E7C1FC3EB0A00B75C43 /* Frameworks */,
 				E3BF7E7D1FC3EB0A00B75C43 /* Resources */,
-				589CF3A64804B054F05B8DF4 /* [CP] Embed Pods Frameworks */,
-				B936751B86BF5B4EF3BB0D18 /* [CP] Copy Pods Resources */,
+				C145E73659A1C662EC553DDE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = counterApp;
+			packageProductDependencies = (
+				E358ACF324B44193001A36C7 /* SwiftPackageProductDependency */,
+			);
 			productName = counterApp;
 			productReference = E3BF7E7F1FC3EB0A00B75C43 /* counterApp.app */;
 			productType = "com.apple.product-type.application";
@@ -178,6 +182,9 @@
 				Base,
 			);
 			mainGroup = E3BF7E761FC3EB0A00B75C43;
+			packageReferences = (
+				E358ACF224B44193001A36C7 /* RemoteSwiftPackageReference */,
+			);
 			productRefGroup = E3BF7E801FC3EB0A00B75C43 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -219,37 +226,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		589CF3A64804B054F05B8DF4 /* [CP] Embed Pods Frameworks */ = {
+		C145E73659A1C662EC553DDE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B936751B86BF5B4EF3BB0D18 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-counterApp/Pods-counterApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-counterApp/Pods-counterApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -398,7 +389,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -412,7 +404,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MTVX256SW2;
 				INFOPLIST_FILE = counterApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jlangmann.counterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -429,7 +424,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MTVX256SW2;
 				INFOPLIST_FILE = counterApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jlangmann.counterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -459,6 +457,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E358ACF224B44193001A36C7 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/patchthecode/JTAppleCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E358ACF324B44193001A36C7 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E358ACF224B44193001A36C7 /* RemoteSwiftPackageReference */;
+			productName = JTAppleCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E3BF7E771FC3EB0A00B75C43 /* Project object */;
 }

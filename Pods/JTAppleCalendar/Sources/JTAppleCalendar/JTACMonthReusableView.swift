@@ -1,7 +1,7 @@
 //
-//  JTAppleCollectionReusableView.swift
+//  JTACMonthReusableView.swift
 //
-//  Copyright (c) 2016-2017 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
+//  Copyright (c) 2016-2020 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,13 @@
 //  THE SOFTWARE.
 //
 
+import Foundation
+import UIKit
+
 /// The header view class of the calendar
-open class JTAppleCollectionReusableView: UICollectionReusableView {
+@available(*, unavailable, renamed: "JTACMonthReusableView")
+open class JTAppleCollectionReusableView: UICollectionReusableView {}
+open class JTACMonthReusableView: UICollectionReusableView {
     /// Initializes and returns a newly allocated view object with the specified frame rectangle.
     public override init(frame: CGRect) {
         super.init(frame: frame)
