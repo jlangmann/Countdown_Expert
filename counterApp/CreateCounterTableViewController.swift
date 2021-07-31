@@ -88,7 +88,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         // Set photoImageView to display the selected image.
@@ -141,6 +141,8 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         namePicker.dataSource = self
         nameTextField.delegate = self
         
+        timeDone.isHidden = true
+        
         if let counter = counter {
             navigationItem.title = counter.name
             nameTextField.text = counter.name
@@ -165,6 +167,8 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         dateLbl.text = formatter.string(from:selectedDate)
         
         tableView.tableFooterView = UIView()
+        let topInset: CGFloat = 30
+        tableView.contentInset.top = topInset
     }
 
     override func didReceiveMemoryWarning() {
@@ -184,10 +188,12 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             if timeCellExpanded{
                 timeCellExpanded = false
                 caretImg.image = UIImage(named: "arrowCollapse")
+                timeDone.isHidden = true
             }
             else {
                 timeCellExpanded = true
                 caretImg.image = UIImage(named: "arrowExpand")
+                timeDone.isHidden = false
             }
             tableView.beginUpdates()
             tableView.endUpdates()

@@ -79,6 +79,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     
     private func saveCountdowns() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(counters, toFile: Counter.ArchiveURL.path)
+        
         if isSuccessfulSave {
             os_log("Countdown successfully saved.", log: OSLog.default, type: .debug)
         } else {
@@ -116,7 +117,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         if self.segueDeleteCell {
             self.segueDeleteCell = false
             
-            let refreshAlert = UIAlertController(title: "Delete Countdown", message: "Are you sure you want to delete this countdown?", preferredStyle: UIAlertControllerStyle.alert)
+            let refreshAlert = UIAlertController(title: "Delete Countdown", message: "Are you sure you want to delete this countdown?", preferredStyle: UIAlertController.Style.alert)
                 
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 guard let indexPath = self.tableView.indexPathForSelectedRow else {
@@ -241,7 +242,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     }
 
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             self.deleteCountdown(indexPath: indexPath)

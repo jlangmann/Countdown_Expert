@@ -40,41 +40,33 @@ class CounterTableViewCell: UITableViewCell {
     {
         if (UserDefaults.standard.bool(forKey: key))
         {
+            let calAdjust = Calendar.autoupdatingCurrent
             let content = UNMutableNotificationContent()
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
+            var countdownDate:Date = date;
+            
             content.title = NSString.localizedUserNotificationString(forKey: self.counterNameLbl.text!, arguments: nil)
             
             var message = "Countdown completed! " + dateLbl.text!
             if key == notifyOneWeek
             {
                 message = "Countdown will be completed in 1 week: " + dateLbl.text!
+                countdownDate = calAdjust.date(byAdding:.day, value: -7, to: date)!
             }
             else if key == notifyOneDay
             {
                 message = "Countdown will be completed in 1 day: " + dateLbl.text!
+                countdownDate = calAdjust.date(byAdding:.day, value: -1, to: date)!
+
             }
             else if key == notifyOneHour
             {
                 message = "Countdown will be completed in 1 hour: " + dateLbl.text!
-            }
+                countdownDate = calAdjust.date(byAdding:.hour, value: -1, to:date)!
 
+            }
             content.body = NSString.localizedUserNotificationString(forKey: message,
                                                                     arguments: nil)
-         
-            let calAdjust = Calendar.autoupdatingCurrent
-            var countdownDate:Date = date;
-            if (key == notifyOneWeek)
-            {
-                countdownDate = calAdjust.date(byAdding:.day, value: -7, to: date)!
-            }
-            else if (key == notifyOneDay)
-            {
-                countdownDate = calAdjust.date(byAdding:.day, value: -1, to: date)!
-            }
-            else if (key == notifyOneHour)
-            {
-                countdownDate = calAdjust.date(byAdding:.hour, value: -1, to:date)!
-            }
 
             // Configure the trigger
             var dateInfo = DateComponents()
