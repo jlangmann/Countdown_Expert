@@ -571,7 +571,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="HLd-rR-HQw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="25" id="HLd-rR-HQw">
                                         <rect key="frame" x="0.0" y="368.5" width="375" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HLd-rR-HQw" id="Ypf-o8-agI">
@@ -580,7 +580,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="yBx-Pa-74j">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="yBx-Pa-74j">
                                         <rect key="frame" x="0.0" y="393.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yBx-Pa-74j" id="7a0-E5-MFq">
@@ -588,10 +588,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KdA-R4-TxJ">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="45"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="50"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyP-Vr-CPd">
-                                                            <rect key="frame" x="0.0" y="7.5" width="295" height="30"/>
+                                                            <rect key="frame" x="0.0" y="10" width="295" height="30"/>
                                                             <gestureRecognizers/>
                                                             <state key="normal" title="Change Photo">
                                                                 <color key="titleColor" red="0.51764705879999995" green="0.40784313729999999" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -601,22 +601,20 @@
                                                             </connections>
                                                         </button>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" highlightedImage="defaultPhoto" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lg3-oz-bkv">
-                                                            <rect key="frame" x="295" y="0.0" width="50" height="45"/>
+                                                            <rect key="frame" x="295" y="0.0" width="50" height="50"/>
                                                             <gestureRecognizers/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="yEn-Wr-5cV"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="45" id="0LK-hV-epz"/>
-                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="KdA-R4-TxJ" secondAttribute="trailing" constant="15" id="7lm-j2-efn"/>
                                                 <constraint firstItem="KdA-R4-TxJ" firstAttribute="leading" secondItem="7a0-E5-MFq" secondAttribute="leading" constant="15" id="Ce3-rh-bcH"/>
-                                                <constraint firstItem="KdA-R4-TxJ" firstAttribute="top" secondItem="7a0-E5-MFq" secondAttribute="top" id="uYL-dQ-rfh"/>
+                                                <constraint firstItem="KdA-R4-TxJ" firstAttribute="top" secondItem="7a0-E5-MFq" secondAttribute="top" id="kQN-j8-vrK"/>
+                                                <constraint firstAttribute="bottom" secondItem="KdA-R4-TxJ" secondAttribute="bottom" id="wVX-CZ-NeN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1088,8 +1086,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DlB-Rv-yel"/>
-        <segue reference="zuz-Dj-QE8"/>
+        <segue reference="0hn-2d-Zr8"/>
+        <segue reference="Kyi-K2-zcH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Icons" width="30" height="28"/>

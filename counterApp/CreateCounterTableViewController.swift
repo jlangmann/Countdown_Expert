@@ -38,6 +38,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     
     @IBAction func selectImage(_ sender: Any) {
         _chooseImage()
+        print("**** SELECTING IMAGE")
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -86,15 +87,18 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         tableView.endUpdates()
         print("***** HIT DONE!!!")
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-        // Set photoImageView to display the selected image.
-        photoImageView.image = selectedImage
         
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            // Set photoImageView to display the selected image.
+            DispatchQueue.main.async {
+                self.photoImageView.image = selectedImage
+                self.photoImageView.setNeedsDisplay()
+            }
+        }
+
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
@@ -128,6 +132,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         
         // Make sure ViewController is notified when the user picks an image.
         imagePickerController.delegate = self
+
         present(imagePickerController, animated: true, completion: nil)
     }
     
