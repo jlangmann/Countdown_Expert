@@ -84,6 +84,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         self.tableView.deselectRow(at: indexPath, animated: false)
         tableView.beginUpdates()
         tableView.endUpdates()
+        print("***** HIT DONE!!!")
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -142,6 +143,8 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         nameTextField.delegate = self
         
         timeDone.isHidden = true
+        timePicker.isHidden = true
+        
         
         if let counter = counter {
             navigationItem.title = counter.name
@@ -204,7 +207,10 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         }
     }
     
+    /*
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        
         if indexPath.row == 3
         {
             if timeCellExpanded {
@@ -221,6 +227,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         
         return 50
     }
+ */
 
     // MARK: - Navigation
 
