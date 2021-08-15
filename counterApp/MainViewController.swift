@@ -44,10 +44,6 @@ class MainViewController: UIViewController {
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "counterNavigation") as! UINavigationController
         self.present(newViewController, animated: true, completion: nil)
     }
-    
-    private func loadCountdowns() -> [Counter]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

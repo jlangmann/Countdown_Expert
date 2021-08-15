@@ -74,21 +74,34 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     
     @IBAction func unwindAndDelete(sender: UIStoryboardSegue)
     {
-        self.segueDeleteCell = true
+        guard let indexPath = self.tableView.indexPathForSelectedRow else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        self.deleteCountdown(indexPath: indexPath)
     }
-    
+
     private func saveCountdowns() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(counters, toFile: Counter.ArchiveURL.path)
-        
-        if isSuccessfulSave {
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: counters, requiringSecureCoding: false)
+            try data.write(to: Counter.ArchiveURL)
             os_log("Countdown successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save countdowns...", log: OSLog.default, type: .error)
+        } catch {
+            os_log("Failed to save countdown...", log: OSLog.default, type: .error)
         }
     }
     
     private func loadCountdowns() -> [Counter]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Counter.ArchiveURL.path) as? [Counter]
+        do {
+            let data = try Data(contentsOf:Counter.ArchiveURL)
+
+            if let countdowns = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Array<Counter> {
+                return countdowns
+            }
+        } catch {
+            print("Couldn't read file.")
+            return nil
+        }
+        return nil
     }
     
     private func deleteCountdown(indexPath: IndexPath)
@@ -114,6 +127,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("NOW CALLING VIEW DID APPEAR")
         if self.segueDeleteCell {
             self.segueDeleteCell = false
             

@@ -20,7 +20,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     
     @IBOutlet var namePicker: UIPickerView!
     @IBOutlet var caretImg: UIImageView!
-    @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var timePicker: UIDatePicker!
     @IBOutlet var timeLbl: UILabel!
@@ -29,6 +28,10 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var timeDone: UIButton!
     @IBOutlet var expandNames: UIImageView!
     @IBOutlet var nameDone: UIButton!
+    
+    @IBOutlet var previewCell: UITableViewCell!
+    @IBOutlet var previewImg: UIImageView!
+    
     
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var bgCell: UITableViewCell!
@@ -41,7 +44,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     
     @IBAction func selectImage(_ sender: Any) {
         _chooseImage()
-        print("**** SELECTING IMAGE")
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -107,10 +109,10 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         // The info dictionary may contain multiple representations of the image. You want to use the original.
         
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            // Set photoImageView to display the selected image.
+            // Set previewImg to display the selected image.
             DispatchQueue.main.async {
-                self.photoImageView.image = selectedImage
-                self.photoImageView.setNeedsDisplay()
+                self.previewImg.image = selectedImage
+                self.previewImg.setNeedsDisplay()
             }
         }
 
@@ -169,24 +171,36 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         nameDone.isHidden = true
         nameDone.contentHorizontalAlignment = .right
 
+        datePicker.minimumDate = Date()
+        datePicker.semanticContentAttribute = .forceRightToLeft
+        datePicker.subviews.first?.semanticContentAttribute = .forceRightToLeft
+
+        previewImg.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint(item: previewImg!, attribute: .height, relatedBy: .equal, toItem: previewCell, attribute: .height, multiplier: 0.8, constant: 0).isActive=true
+                
+        NSLayoutConstraint(item: previewImg!, attribute: .centerX, relatedBy: .equal, toItem: previewCell, attribute: .centerX, multiplier: 1, constant: 0).isActive=true
+        
+        NSLayoutConstraint(item: previewImg!, attribute: .centerY, relatedBy: .equal, toItem: previewCell, attribute: .centerY, multiplier: 1, constant: 0).isActive=true
+        
+        
+        
         if let counter = counter {
             navigationItem.title = counter.name
             nameTextField.text = counter.name
-            photoImageView.image = counter.photo
+            previewImg.image = counter.photo
             selectedDate = counter.date
             timePicker.date = counter.time
             self.deleteBtn.isHidden = false
-            self.bgCell.backgroundColor = counter.bgColor
-            self.bgCell.backgroundColor?.setFill()
-            self.bgCell.isHidden = false
+            self.previewCell.backgroundColor = counter.bgColor
+            self.previewCell.backgroundColor?.setFill()
         }
         else
         {
             selectedDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
             timePicker.date = selectedDate
             self.deleteBtn.isHidden = true
-            self.bgCell.isHidden = true
-            self.bgCell.backgroundColor = UIColor.white
+            self.previewCell.backgroundColor = UIColor.white
         }
         timeLbl.text = formatter.string(from: timePicker.date)
         formatter.dateStyle = .long
@@ -259,6 +273,10 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             return (150 + super.tableView(tableView, heightForRowAt: indexPath))
         }
         
+        if indexPath.row == 8 {
+            return UIScreen.main.bounds.width*0.7
+        }
+        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
@@ -296,7 +314,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             return
         }
         var name = nameTextField.text
-        let photo1 = photoImageView.image
+        let photo1 = previewImg.image
         
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: timePicker.date)
@@ -317,14 +335,14 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             counter.photo = photo1
             counter.date = datePicker.date
             counter.time = timeDate
-            counter.bgColor = bgCell.backgroundColor!
+            counter.bgColor = previewCell.backgroundColor!
         }
         else {
             if name == ""
             {
                 name = "Untitled"
             }
-            counter = Counter(name: name!, photo: photo1, date: selectedDate, time: timeDate, createdAt: Date(), bgColor: bgCell.backgroundColor!)
+            counter = Counter(name: name!, photo: photo1, date: selectedDate, time: timeDate, createdAt: Date(), bgColor: previewCell.backgroundColor!)
         }
     }
 
@@ -333,7 +351,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         if let backgroundController = sender.source as? BackgroundViewController {
             let selColor = backgroundController.selColor
             counter?.bgColor = selColor
-            bgCell.backgroundColor = selColor
+            previewCell.backgroundColor = selColor
         }
     }
 

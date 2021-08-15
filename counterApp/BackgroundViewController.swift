@@ -8,11 +8,12 @@
 
 import UIKit
 
-class BackgroundViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class BackgroundViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
-    var items = [0x2d0a68, 0x59027c, 0xa11da0, 0xde3276, 0xf35752, 0xf7823b, 0xffa85a,0xffc468,0xffec9b]
+    var items = [0x2d0a68, 0x59027c, 0xa11da0, 0xde3276, 0xf35752, 0xf7823b, 0xffa85a,0xffc468,0x000000]
     
+    @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var tableView: UICollectionView!
     var selColor:UIColor = UIColor.white
     
@@ -27,6 +28,18 @@ class BackgroundViewController: UIViewController, UICollectionViewDataSource, UI
         
         return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+        {
+        let w = (collectionView.bounds.width / 3.0) - 20
+        return CGSize(width: w, height: w)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+           let offset = CGFloat(20)
+           return UIEdgeInsets(top: offset, left: offset, bottom: offset, right: offset)
+       }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // get a reference to our storyboard cell
@@ -50,6 +63,14 @@ class BackgroundViewController: UIViewController, UICollectionViewDataSource, UI
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: tableView!, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0).isActive=true
+        
+        NSLayoutConstraint(item: tableView!, attribute: .top, relatedBy: .equal, toItem: navigationBar, attribute: .bottom, multiplier: 1, constant: 0).isActive=true
+        
+        NSLayoutConstraint(item: tableView!, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0).isActive=true
+        
+        NSLayoutConstraint(item: tableView!, attribute: .height, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0).isActive=true
     }
 
     override func didReceiveMemoryWarning() {
