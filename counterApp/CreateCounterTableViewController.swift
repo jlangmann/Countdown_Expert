@@ -23,7 +23,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var timePicker: UIDatePicker!
-    @IBOutlet var dateLbl: UILabel!
     @IBOutlet var timeLbl: UILabel!
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var editImgBtn: UIButton!
@@ -31,6 +30,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var expandNames: UIImageView!
     @IBOutlet var nameDone: UIButton!
     
+    @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var bgCell: UITableViewCell!
     
     @IBOutlet var bgCellView: UIView!
@@ -190,7 +190,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         }
         timeLbl.text = formatter.string(from: timePicker.date)
         formatter.dateStyle = .long
-        dateLbl.text = formatter.string(from:selectedDate)
+        datePicker.setDate(selectedDate, animated: false)
         
         tableView.tableFooterView = UIView()
         let topInset: CGFloat = 30
@@ -224,9 +224,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             tableView.beginUpdates()
             tableView.endUpdates()
             
-        }
-        if (indexPath.row == 3){
-            performSegue(withIdentifier: "selectDate", sender: nil)
         }
         else if indexPath.row == 4
         {
@@ -318,7 +315,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             }
             counter.name = name!
             counter.photo = photo1
-            counter.date = selectedDate
+            counter.date = datePicker.date
             counter.time = timeDate
             counter.bgColor = bgCell.backgroundColor!
         }
@@ -331,13 +328,6 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         }
     }
 
-    @IBAction func unwindFromCalendar(sender: UIStoryboardSegue) {
-        if let calendarController = sender.source as? CalendarViewController, let selDate = calendarController.selectedDate {
-            selectedDate = selDate
-            formatter.dateStyle = .long
-            dateLbl.text = formatter.string(from:selectedDate)
-        }
-    }
     
     @IBAction func unwindFromBackgroundColor(sender: UIStoryboardSegue) {
         if let backgroundController = sender.source as? BackgroundViewController {
