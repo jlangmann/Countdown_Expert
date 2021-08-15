@@ -14,6 +14,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     
     let pickerData = [["Anniversary", "Birthday", "Deadline", "Event", "Holiday", "Vacation"]]
     var timeCellExpanded: Bool = false
+    var nameCellExpanded: Bool = false
     let formatter = DateFormatter()
     var showNames = false
     
@@ -27,6 +28,8 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet var editImgBtn: UIButton!
     @IBOutlet var timeDone: UIButton!
+    @IBOutlet var expandNames: UIImageView!
+    @IBOutlet var nameDone: UIButton!
     
     @IBOutlet var bgCell: UITableViewCell!
     
@@ -77,15 +80,27 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         tableView.endUpdates()
     }
  
+    @IBAction func nameDoneClose(_ sender: Any) {
+        nameCellExpanded = false
+        expandNames.image = UIImage(named: "arrowCollapse")
+        nameDone.isHidden = true
+        namePicker.isHidden = true
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    
     @IBAction func timeDoneClose(_ sender: Any) {
         // time close and done
         timeCellExpanded = false
         caretImg.image = UIImage(named: "arrowCollapse")
         let indexPath = IndexPath(row: 3, section: 0)
         self.tableView.deselectRow(at: indexPath, animated: false)
+        
+        timeDone.isHidden = true
+        timePicker.isHidden = true
         tableView.beginUpdates()
         tableView.endUpdates()
-        print("***** HIT DONE!!!")
     }
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -149,8 +164,11 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
         
         timeDone.isHidden = true
         timePicker.isHidden = true
+        timeDone.contentHorizontalAlignment = .right
         
-        
+        nameDone.isHidden = true
+        nameDone.contentHorizontalAlignment = .right
+
         if let counter = counter {
             navigationItem.title = counter.name
             nameTextField.text = counter.name
@@ -188,51 +206,64 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if (indexPath.row == 2){
+        if (indexPath.row == 1)
+        {
+            //  Expanding names
+            if nameCellExpanded {
+                nameCellExpanded = false
+                expandNames.image = UIImage(named: "arrowCollapse")
+                namePicker.isHidden = true
+                nameDone.isHidden = true
+            }
+            else {
+                nameCellExpanded = true
+                expandNames.image = UIImage(named: "arrowExpand")
+                namePicker.isHidden = false
+                nameDone.isHidden = false
+            }
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+        }
+        if (indexPath.row == 3){
             performSegue(withIdentifier: "selectDate", sender: nil)
         }
-        else if indexPath.row == 3
+        else if indexPath.row == 4
         {
             if timeCellExpanded{
                 timeCellExpanded = false
                 caretImg.image = UIImage(named: "arrowCollapse")
                 timeDone.isHidden = true
+                timePicker.isHidden = true
             }
             else {
                 timeCellExpanded = true
                 caretImg.image = UIImage(named: "arrowExpand")
                 timeDone.isHidden = false
+                timePicker.isHidden = false
             }
             tableView.beginUpdates()
             tableView.endUpdates()
         }
-        else if (indexPath.row == 5)
+        else if (indexPath.row == 6)
         {
             _chooseImage()
         }
     }
-    
-    /*
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         
-        if indexPath.row == 3
-        {
-            if timeCellExpanded {
-                return 250
-            }
-        }
-        else if (indexPath.row == 1 || indexPath.row == 4 || indexPath.row == 7)
-        {
-            return 25
-        }
-        else if (indexPath.row == 0 && self.showNames) {
-            return 160
+        if indexPath.row == 4 && timeCellExpanded {
+            return (230 + super.tableView(tableView, heightForRowAt: indexPath))
         }
         
-        return 50
+        if indexPath.row == 1 && nameCellExpanded {
+            return (150 + super.tableView(tableView, heightForRowAt: indexPath))
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
- */
 
     // MARK: - Navigation
 
