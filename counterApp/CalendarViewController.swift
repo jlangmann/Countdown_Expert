@@ -116,6 +116,7 @@ extension CalendarViewController: JTACMonthViewDataSource {
 
 func setCellSelected(cell: CustomCell, cellState: CellState)
 {
+    print("****** SETTING SELECTED: " + cell.dateLabel.description)
     if cellState.isSelected {
         cell.selectedView.isHidden = false
         cell.dateLabel.textColor = UIColor(white: 1.0, alpha: 1.0)
