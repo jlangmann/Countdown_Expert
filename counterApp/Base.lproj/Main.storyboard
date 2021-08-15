@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wsj-Ms-l1G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kj3-M5-9xj">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -10,9 +10,9 @@
         <!--Countdowns-->
         <scene sceneID="aoz-TK-xRj">
             <objects>
-                <tableViewController modalTransitionStyle="crossDissolve" id="UKO-YP-Rxc" customClass="CounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="main" storyboardIdentifier="homePage" modalPresentationStyle="fullScreen" id="UKO-YP-Rxc" customClass="CounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LyQ-oe-1Uc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -108,22 +108,6 @@
             </objects>
             <point key="canvasLocation" x="-954.39999999999998" y="131.78410794602701"/>
         </scene>
-        <!--Main View Controller-->
-        <scene sceneID="XD4-og-zew">
-            <objects>
-                <viewController id="Wsj-Ms-l1G" customClass="MainViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0UR-e8-q6f">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vAL-h8-BpM"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="V4h-S9-2Id"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="htR-3s-6ph" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2273" y="1025"/>
-        </scene>
         <!--Loading Screen View Controller-->
         <scene sceneID="Qpo-tJ-F8m">
             <objects>
@@ -133,46 +117,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="2s6-46-WdW">
-                                <rect key="frame" x="20" y="45" width="335" height="236"/>
+                                <rect key="frame" x="20" y="45" width="335" height="322"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ewL-U7-QpH">
-                                        <rect key="frame" x="87.5" y="0.0" width="160" height="160"/>
+                                        <rect key="frame" x="42.5" y="0.0" width="250" height="250"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="160" id="34C-bS-sPg"/>
-                                            <constraint firstAttribute="height" constant="160" id="6ZS-g4-mg0"/>
+                                            <constraint firstAttribute="width" secondItem="ewL-U7-QpH" secondAttribute="height" multiplier="1:1" id="Dlk-6i-2vw"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8C0-3v-i4u">
-                                        <rect key="frame" x="71.5" y="190" width="192" height="46"/>
-                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="Create Countdown">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="Tut-Tt-2QU" kind="show" id="C0d-kr-QzN"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown Expert!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1g-dr-Rke">
+                                        <rect key="frame" x="15" y="280" width="305" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
+                                        <color key="textColor" red="0.36890718620000001" green="0.0" blue="0.54446018100000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="heg-FO-07h"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="heg-FO-07h" firstAttribute="trailing" secondItem="2s6-46-WdW" secondAttribute="trailing" constant="20" id="0Xy-Ux-klZ"/>
                             <constraint firstItem="2s6-46-WdW" firstAttribute="top" secondItem="heg-FO-07h" secondAttribute="top" constant="45" id="Mtv-zY-bU9"/>
                             <constraint firstItem="2s6-46-WdW" firstAttribute="leading" secondItem="heg-FO-07h" secondAttribute="leading" constant="20" id="ib1-Lk-QBc"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="createBtn" destination="8C0-3v-i4u" id="aTs-7O-xG9"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bb-8Z-acH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1183" y="1087"/>
+            <point key="canvasLocation" x="-2974" y="188"/>
         </scene>
         <!--Settings-->
         <scene sceneID="s5H-qn-Xki">
@@ -404,9 +377,9 @@
         <!--Create Counter Table View Controller-->
         <scene sceneID="Qun-R9-xJD">
             <objects>
-                <tableViewController id="SsF-Ph-zr0" customClass="CreateCounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="fullScreen" id="SsF-Ph-zr0" customClass="CreateCounterTableViewController" customModule="counterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="5" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="5jl-3g-wV0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="QZ0-s2-YpH">
@@ -514,7 +487,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <datePicker contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="yfD-WB-3he">
-                                                            <rect key="frame" x="172" y="0.0" width="173" height="216"/>
+                                                            <rect key="frame" x="172.5" y="0.0" width="172.5" height="216"/>
                                                         </datePicker>
                                                     </subviews>
                                                     <constraints>
@@ -807,10 +780,11 @@
         <!--Navigation Controller-->
         <scene sceneID="0g3-Su-ibS">
             <objects>
-                <navigationController storyboardIdentifier="counterNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Tut-Tt-2QU" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecb-fQ-ZxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="counterNavigation" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Tut-Tt-2QU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="efx-2n-YDX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -818,7 +792,6 @@
                         <segue destination="UKO-YP-Rxc" kind="relationship" relationship="rootViewController" id="JVY-UG-LOg"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ecb-fQ-ZxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1974" y="132"/>
         </scene>
@@ -842,7 +815,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kyi-K2-zcH"/>
+        <segue reference="2Iq-Lg-HMm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Icons" width="30" height="28"/>

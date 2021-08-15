@@ -200,7 +200,7 @@ class CreateCounterTableViewController: UITableViewController, UITextFieldDelega
             selectedDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
             timePicker.date = selectedDate
             self.deleteBtn.isHidden = true
-            self.previewCell.backgroundColor = UIColor.white
+            self.previewCell.backgroundColor = BackgroundViewController.randomColor()
         }
         timeLbl.text = formatter.string(from: timePicker.date)
         formatter.dateStyle = .long

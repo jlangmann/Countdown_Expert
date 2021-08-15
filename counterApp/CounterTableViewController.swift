@@ -28,6 +28,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
             }
             else {
                 
+                /*
                 // Set counter bg color here
                 let nextIndex = counters.count % 6
                 if (nextIndex == 0)
@@ -54,6 +55,7 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
                 {
                     counter.bgColor = getColorByHex(rgbHexValue: 0xffce22)
                 }
+                */
                 
                 // Add a new counter.
                 counters.append(counter)
@@ -127,7 +129,6 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("NOW CALLING VIEW DID APPEAR")
         if self.segueDeleteCell {
             self.segueDeleteCell = false
             
@@ -225,14 +226,6 @@ class CounterTableViewController: UITableViewController, UNUserNotificationCente
         return cell
     }
 
-    func getColorByHex(rgbHexValue:UInt32, alpha:Double = 1.0) -> UIColor {
-        let red = Double((rgbHexValue & 0xFF0000) >> 16) / 256.0
-        let green = Double((rgbHexValue & 0xFF00) >> 8) / 256.0
-        let blue = Double((rgbHexValue & 0xFF)) / 256.0
-        
-        return UIColor(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: CGFloat(alpha))
-    }
-    
     func combineDateWithTime(date: Date, time: Date) -> Date? {
         let calendar = NSCalendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)

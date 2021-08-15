@@ -8,20 +8,27 @@
 
 import UIKit
 
+
 class BackgroundViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
-    var items = [0x2d0a68, 0x59027c, 0xa11da0, 0xde3276, 0xf35752, 0xf7823b, 0xffa85a,0xffc468,0x000000]
+    static var items = [0x31178f, 0xa728ca, 0xf037bf, 0x1264bf, 0x0ac1f9, 0x0eede5, 0xf95434,0xfa8e25, 0xfed783]
     
     @IBOutlet var navigationBar: UINavigationBar!
     @IBOutlet var tableView: UICollectionView!
     var selColor:UIColor = UIColor.white
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.items.count
+    static func randomColor() -> UIColor
+    {
+        let index = Int(arc4random_uniform(9))
+        return BackgroundViewController.getColorByHex(rgbHexValue: UInt32(items[index]))
     }
     
-    func getColorByHex(rgbHexValue:UInt32, alpha:Double = 1.0) -> UIColor {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return BackgroundViewController.items.count
+    }
+    
+    static func getColorByHex(rgbHexValue:UInt32, alpha:Double = 1.0) -> UIColor {
         let red = Double((rgbHexValue & 0xFF0000) >> 16) / 256.0
         let green = Double((rgbHexValue & 0xFF00) >> 8) / 256.0
         let blue = Double((rgbHexValue & 0xFF)) / 256.0
@@ -46,7 +53,7 @@ class BackgroundViewController: UIViewController, UICollectionViewDataSource, UI
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) 
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
-        cell.backgroundColor = getColorByHex(rgbHexValue: UInt32(self.items[indexPath.item]))
+        cell.backgroundColor = BackgroundViewController.getColorByHex(rgbHexValue: UInt32(BackgroundViewController.items[indexPath.item]))
         return cell
     }
     
@@ -54,8 +61,8 @@ class BackgroundViewController: UIViewController, UICollectionViewDataSource, UI
         let selectedItems = self.tableView.indexPathsForSelectedItems
         if (selectedItems?.count)! > 0
         {
-            let hex = self.items[selectedItems![0].item]
-            selColor = getColorByHex(rgbHexValue:UInt32(hex))
+            let hex = BackgroundViewController.items[selectedItems![0].item]
+            selColor = BackgroundViewController.getColorByHex(rgbHexValue:UInt32(hex))
         }
     }
     

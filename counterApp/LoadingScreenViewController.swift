@@ -10,12 +10,26 @@ import UIKit
 
 class LoadingScreenViewController: UIViewController {
 
-    @IBOutlet var createBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createBtn.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
+        
+        UIView.animate(
+            withDuration: 2,
+            delay: 0.0,
+            options: .curveEaseInOut,
+            animations: {
+            },
+            completion: {_ in
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "homePage") as! CounterTableViewController
+                newViewController.modalPresentationStyle = .fullScreen
+                let navController = UINavigationController(rootViewController: newViewController)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated:true, completion: nil)
+            })
+
     }
 
     override func didReceiveMemoryWarning() {
